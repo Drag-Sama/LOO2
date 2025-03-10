@@ -2,7 +2,8 @@ package Formes;
 
 import Point.Point;
 
-public class Formes {
+
+public class Formes{
     Point centre;
 
     public Point getCentre() {
@@ -13,4 +14,8 @@ public class Formes {
         this.centre = centre;
     }
 
+    
+
 }
+
+
