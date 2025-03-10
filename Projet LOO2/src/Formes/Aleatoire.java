@@ -41,10 +41,14 @@ public class Aleatoire extends Formes{
     /** Enlève un point de la liste de points
      * 
      * @param point
+     * @return true si on a pu retirer le point, false sinon.
      */
-    public void removePoint(Point point){
-        if(this.points.remove(point))
+    public boolean removePoint(Point point){
+        if(this.points.remove(point)) {
             this.nbPoints -= 1;
+            return true;
+        }
+        return false; 
     }
 
     public static void main(String[] args) {
