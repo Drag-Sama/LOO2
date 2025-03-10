@@ -5,8 +5,8 @@ import java.util.LinkedHashSet;
 import Point.Point;
 
 public class Aleatoire extends Formes{
-    int nbPoints = 0;
-    LinkedHashSet<Point> points = new LinkedHashSet<Point>();
+    private int nbPoints = 0;
+    private LinkedHashSet<Point> points = new LinkedHashSet<Point>();
 
     public Aleatoire(Point centre){
         this.setCentre(centre);

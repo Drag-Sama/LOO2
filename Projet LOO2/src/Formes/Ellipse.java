@@ -1,8 +1,8 @@
 package Formes;
 
 public class Ellipse extends Formes {
-    float longueur; // = "grand" demi-axe
-    float largeur; // = "petit" demi-axe
+    private float longueur; // = "grand" demi-axe
+    private float largeur; // = "petit" demi-axe
 
     public float getLargeur() {
         return largeur;

@@ -4,7 +4,7 @@ import Point.Point;
 
 
 public class Formes{
-    Point centre;
+    private Point centre;
 
     public Point getCentre() {
         return centre;
