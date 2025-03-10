@@ -3,6 +3,7 @@ import processing.core.PApplet;
 
 import java.util.HashSet;
 
+import Formes.Aleatoire;
 import Formes.Cercle;
 import Formes.Ellipse;
 import Formes.Formes;
@@ -38,19 +39,41 @@ public class Dessin extends PApplet{
         
 
         Point point3 = new Point(70, 200);
-        Cercle cercle = new Cercle(100,point3);
+        Cercle cercle = new Cercle(100, point3);
         plan.addForme(cercle);
 
         Point point4 = new Point(453, 486);
         Ellipse ellipse = new Ellipse(145,70,point4);
         plan.addForme(ellipse);
+
+        Aleatoire alea = new Aleatoire(point4);
+        alea.addPoint(point);
+        alea.addPoint(point2);
+        alea.addPoint(point3);
+        alea.addPoint(point4);
+        plan.addForme(alea);
+
         HashSet<Formes> formes = plan.getFormes();
         for (Formes actFormes : formes) {
-            if(actFormes instanceof Cercle){
+            if(actFormes instanceof Cercle){//Si c'est un cercle
                 circle(actFormes.getCentre().getX(),actFormes.getCentre().getY(), ((Cercle)actFormes).getRayon());
             }
-            else if(actFormes instanceof Ellipse){
+            else if(actFormes instanceof Ellipse){//Si c'est une ellipse
                 ellipse(actFormes.getCentre().getX(),actFormes.getCentre().getY(), ((Ellipse)actFormes).getLargeur(),((Ellipse)actFormes).getLongueur());
+            }
+            else{//Si c'est une forme aleatoire
+                Point prevPoint = new Point(-1,-1);
+                Point actPoint = new Point(-1, -1);
+                for (int i = 1; i < ((Aleatoire)actFormes).getNbPoints(); i++) {
+                    prevPoint = ((Point[])((Aleatoire)actFormes).getPoints().toArray())[i-1];
+                    actPoint  = ((Point[])((Aleatoire)actFormes).getPoints().toArray())[i];
+                    line(prevPoint.getX(), prevPoint.getY(), actPoint.getX(), actPoint.getY()); 
+                    
+                    
+                }
+                prevPoint = ((Point[])((Aleatoire)actFormes).getPoints().toArray())[((Aleatoire)actFormes).getNbPoints()];
+                actPoint  = ((Point[])((Aleatoire)actFormes).getPoints().toArray())[0];
+                line(prevPoint.getX(), prevPoint.getY(), actPoint.getX(), actPoint.getY()); 
             }
         }
         
