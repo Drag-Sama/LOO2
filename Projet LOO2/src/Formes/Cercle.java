@@ -1,7 +1,7 @@
 package Formes;
 
 public class Cercle extends Formes {
-    float rayon;
+    private float rayon;
 
     public float getRayon() {
         return rayon;
