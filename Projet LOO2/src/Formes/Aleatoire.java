@@ -42,7 +42,7 @@ public class Aleatoire extends Formes{
         a.setPoints(testPoints);
         int testNbPoints = a.getNbPoints();
         a.setNbPoints(testNbPoints);
-        Point point = new Point();
+        Point point = new Point(1,2);
         a.addPoint(point);
         a.removePoint(point);
     }

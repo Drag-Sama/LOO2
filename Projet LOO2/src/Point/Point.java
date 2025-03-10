@@ -4,6 +4,11 @@ public class Point {
     float x;
     float y;
 
+    public Point (int newX, int newY){
+        this.x = newX;
+        this.y = newY;
+    }
+
     public void setX(int newX){
         this.x = newX;
     }
