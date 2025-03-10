@@ -6,9 +6,9 @@ import Formes.Formes;
 import Point.Point;
 
 public class Plan {
-    private HashSet<Formes> formes = new HashSet<Formes>();
+    private HashSet<Formes> formes;
     private int nbFormes;
-    private HashSet<Point> points = new HashSet<Point>();
+    private HashSet<Point> points;
     private int nbPoints;
 
     public Plan() {
@@ -107,9 +107,13 @@ public class Plan {
      */
     public void k_means(int clusters) {
         Point[] centres = new Point[clusters];
+        Point[] arrayPoints = new Point[this.getNbPoints()];
+        arrayPoints = (Point[]) this.getPoints().toArray();
         boolean centresModif = true;
         while (centresModif) { // tant que les centres ont été modifiés (à chaque itération) :
-
+            for (Point point : this.getPoints()) { // pour chaque points du plan
+                // on calcule la distance entre ce point et chacun des centres
+            }
         }
     }
 
