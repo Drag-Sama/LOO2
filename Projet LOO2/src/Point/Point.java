@@ -27,11 +27,27 @@ public class Point {
 
     /** Calcule la distance entre le point d'origine et le point en paramètre
      * 
-     * @param a
+     * @param a le 2e point
      * @return la distance entre les deux points
      */
-    float getDist(Point a){
+    public float getDist(Point a){
         return Math.abs(this.x - a.getX() + this.y - a.getY());
     }
+
+    /**
+     * Retourne la valeur de l'indice du point du tableau "points" le plus proche
+     * @param points à comparer
+     * @return
+     */
+    public int getminDistPoint(Point[] points) {
+        int min = 0;
+        for (int i = 0; i < points.length; i++) {
+            if (this.getDist(points[i]) <= this.getDist(points[min])) {
+                min = i;
+            }
+        }
+        return min;
+    }
 }
+
 
