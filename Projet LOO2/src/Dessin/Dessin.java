@@ -2,7 +2,6 @@ package Dessin;
 import processing.core.PApplet;
 
 import java.util.HashSet;
-import java.util.Random;
 
 import Formes.Cercle;
 import Formes.Ellipse;
