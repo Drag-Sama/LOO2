@@ -1,9 +1,5 @@
 package Plan;
 
-/**
- * Plan composé de formes / points
- */
-
 import java.util.HashSet;
 
 import Formes.Formes;
@@ -15,7 +11,10 @@ public class Plan {
     private HashSet<Point> points;
     private int nbPoints;
 
-    
+    public Plan() {
+        setNbFormes(0);
+        setNbPoints(0);
+    }
 
     ///////// ACCESSEURS /////////////
 
@@ -54,18 +53,17 @@ public class Plan {
 
     ///////// METHODES ////////////
 
-    /** Ajoute une forme à la liste des formes du plan et actualise nbFormes
-     * 
-     * @param forme
+    /**
+     * Ajoute une forme à la liste des formes du plan et actualise nbFormes
+     * @param forme à ajouter
      */
-
     public void addForme(Formes forme) {
         this.formes.add(forme);
         this.setNbFormes(this.getNbFormes()+1);
     }
 
-    /** Retire une forme de la liste des formes du plan et actualise nbFormes
-     * 
+    /**
+     * Retire une forme de la liste des formes du plan et actualise nbFormes
      * @param forme
      * @return true si elle a pu être retirée, false sinon.
      */
@@ -78,8 +76,8 @@ public class Plan {
         return false;
     }
 
-    /** Ajoute un point à la liste des points du plan et actualise nbPoints
-     * 
+    /**
+     * Ajoute un point à la liste des points du plan et actualise nbPoints
      * @param point
      */
     public void addPoint(Point point) {
@@ -87,8 +85,8 @@ public class Plan {
         this.setNbPoints(this.getNbPoints()+1);
     }
 
-    /** Retire un point de la liste des points du plan et actualise nbPoints
-     * 
+    /**
+     * Retire un point de la liste des points du plan et actualise nbPoints
      * @param point
      * @return true si le point a pu être retiré, false sinon.
      */
@@ -102,9 +100,17 @@ public class Plan {
     }
 
     //////// METHODES k-means ///////////
-    
-    public void k_means() {
-        
+
+    /**
+     * réalise l'algorithme k-means pour ce plan en utilisant tous les points de celui-ci
+     * @param clusters
+     */
+    public void k_means(int clusters) {
+        Point[] centres = new Point[clusters];
+        boolean centresModif = true;
+        while (centresModif) { // tant que les centres ont été modifiés (à chaque itération) :
+
+        }
     }
 
 
