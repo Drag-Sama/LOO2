@@ -34,4 +34,14 @@ public class Aleatoire extends Formes{
         if(this.points.remove(point))
             this.nbPoints -= 1;
     }
+
+    public static void main(String[] args) {
+        LinkedHashSet<Point> testPoints = new LinkedHashSet<Point>();
+        Aleatoire a = new Aleatoire();
+        testPoints = a.getPoints();
+        a.setPoints(testPoints);
+        int testNbPoints = a.getNbPoints();
+        a.setNbPoints(testNbPoints);
+        
+    }
 }
