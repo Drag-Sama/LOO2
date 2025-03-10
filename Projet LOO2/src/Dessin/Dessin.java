@@ -17,7 +17,7 @@ public class Dessin extends PApplet{
     }
     
     public static void main(String[] args) {
-        String[] appletArgs = new String[] { "Dessing" };
+        String[] appletArgs = new String[] {"Dessin" };
         PApplet.main(appletArgs);
     }
 }
