@@ -7,6 +7,10 @@ import Point.Point;
 public class Aleatoire extends Formes{
     int nbPoints = 0;
     LinkedHashSet<Point> points = new LinkedHashSet<Point>();
+
+    public Aleatoire(Point centre){
+        this.setCentre(centre);
+    }
     
 
     public LinkedHashSet<Point> getPoints() {
@@ -25,11 +29,19 @@ public class Aleatoire extends Formes{
         this.nbPoints = nbPoints;
     }
 
+    /** Ajoute un point à la liste de points
+     * 
+     * @param newPoint
+     */
     public void addPoint(Point newPoint){
         this.points.add(newPoint);
         this.nbPoints += 1;
     }
 
+    /** Enlève un point de la liste de points
+     * 
+     * @param point
+     */
     public void removePoint(Point point){
         if(this.points.remove(point))
             this.nbPoints -= 1;
@@ -37,7 +49,8 @@ public class Aleatoire extends Formes{
 
     public static void main(String[] args) {
         LinkedHashSet<Point> testPoints = new LinkedHashSet<Point>();
-        Aleatoire a = new Aleatoire();
+        Point centre = new Point(0, 0);
+        Aleatoire a = new Aleatoire(centre);
         testPoints = a.getPoints();
         a.setPoints(testPoints);
         int testNbPoints = a.getNbPoints();

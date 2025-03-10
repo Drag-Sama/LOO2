@@ -25,6 +25,11 @@ public class Point {
         return y;
     }
 
+    /** Calcule la distance entre le point d'origine et le point en paramètre
+     * 
+     * @param a
+     * @return la distance entre les deux points
+     */
     float getDist(Point a){
         return Math.abs(this.x - a.getX() + this.y - a.getY());
     }
