@@ -1,16 +1,19 @@
 package Formes;
 
+import java.util.LinkedHashSet;
+
 import Point.Point;
 
 public class Aleatoire extends Formes{
-    Point[] points;
     int nbPoints = 0;
+    LinkedHashSet<Point> points = new LinkedHashSet<Point>();
+    
 
-    public Point[] getPoints() {
+    public LinkedHashSet<Point> getPoints() {
         return points;
     }
 
-    public void setPoints(Point[] points) {
+    public void setPoints(LinkedHashSet<Point> points) {
         this.points = points;
     }
 
@@ -23,7 +26,12 @@ public class Aleatoire extends Formes{
     }
 
     public void addPoint(Point newPoint){
-        points[nbPoints] = newPoint;
-        nbPoints += 1;
+        this.points.add(newPoint);
+        this.nbPoints += 1;
+    }
+
+    public void removePoint(Point point){
+        if(this.points.remove(point))
+            this.nbPoints -= 1;
     }
 }
