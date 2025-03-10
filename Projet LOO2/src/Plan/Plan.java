@@ -10,7 +10,13 @@ import Point.Point;
 
 public class Plan {
     private HashSet<Formes> formes;
+    private int nbFormes;
     private HashSet<Point> points;
+    private int nbPoints;
+
+    
+
+    ///////// ACCESSEURS /////////////
 
     public HashSet<Formes> getFormes() {
         return formes;
@@ -19,4 +25,69 @@ public class Plan {
     public HashSet<Point> getPoints() {
         return points;
     }
+
+    public int getNbFormes() {
+        return nbFormes;
+    }
+
+    public int getNbPoints() {
+        return nbPoints;
+    }
+
+    public void setFormes(HashSet<Formes> formes) {
+        this.formes = formes;
+    }
+
+    public void setPoints(HashSet<Point> points) {
+        this.points = points;
+    }
+
+    public void setNbFormes(int nbFormes) {
+        this.nbFormes = nbFormes;
+    }
+
+    public void setNbPoints(int nbPoints) {
+        this.nbPoints = nbPoints;
+    }
+
+
+    ///////// METHODES ////////////
+
+    /** Ajoute une forme à la liste des formes du plan et actualise nbFormes
+     * 
+     * @param forme
+     */
+
+    public void addForme(Formes forme) {
+        this.formes.add(forme);
+        this.setNbFormes(this.getNbFormes()+1);
+    }
+
+    /** Retire une forme de la liste des formes du plan et actualise nbFormes
+     * 
+     * @param forme
+     * @return true si elle a pu être retirée, false sinon.
+     */
+
+    public boolean removeForme(Formes forme) {
+        if (this.formes.remove(forme)) {
+            this.setNbFormes(this.getNbFormes()-1);
+            return true;
+        }
+        return false;
+    }
+
+    public void addPoint(Point point) {
+        this.points.add(point);
+        this.setNbPoints(this.getNbPoints()+1);
+    }
+
+    public boolean removePoint(Point point) {
+        if (this.points.remove(point)){
+            this.setNbPoints(this.getNbPoints()-1);
+            return true;
+        }
+        return false;
+    }
+
 }
