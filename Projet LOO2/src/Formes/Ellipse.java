@@ -1,8 +1,17 @@
 package Formes;
 
+import Point.Point;
+
 public class Ellipse extends Formes {
     private float longueur; // = "grand" demi-axe
     private float largeur; // = "petit" demi-axe
+
+    public Ellipse(float nvLongueur, float nvLargeur, Point centre){
+        setCentre(centre);
+        setLargeur(nvLargeur);
+        setLongueur(nvLongueur);
+
+    }
 
     public float getLargeur() {
         return largeur;

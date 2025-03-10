@@ -6,9 +6,9 @@ import Formes.Formes;
 import Point.Point;
 
 public class Plan {
-    private HashSet<Formes> formes;
+    private HashSet<Formes> formes = new HashSet<Formes>();
     private int nbFormes;
-    private HashSet<Point> points;
+    private HashSet<Point> points = new HashSet<Point>();
     private int nbPoints;
 
     public Plan() {
