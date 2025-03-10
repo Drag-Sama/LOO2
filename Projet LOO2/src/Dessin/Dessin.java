@@ -4,7 +4,7 @@ import processing.core.PApplet;
 public class Dessin extends PApplet{
 
     public void settings(){
-        size(300, 400);
+        size(1300, 800);
     }
 
     public void setup(){
@@ -12,12 +12,12 @@ public class Dessin extends PApplet{
     }
 
     public void draw(){
-        fill(255,0,0);
-        ellipse(255, 100, 100, 100);
+        fill(0,0,255);
+        ellipse(100, 100, 200, 100);
     }
     
     public static void main(String[] args) {
-        String[] appletArgs = new String[] {"Dessin" };
+        String[] appletArgs = new String[] { "Dessin.Dessin" };
         PApplet.main(appletArgs);
     }
 }

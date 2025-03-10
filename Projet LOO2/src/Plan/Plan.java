@@ -1,4 +1,5 @@
 package Plan;
+
 /**
  * Plan composé de formes / points
  */
@@ -77,10 +78,20 @@ public class Plan {
         return false;
     }
 
+    /** Ajoute un point à la liste des points du plan et actualise nbPoints
+     * 
+     * @param point
+     */
     public void addPoint(Point point) {
         this.points.add(point);
         this.setNbPoints(this.getNbPoints()+1);
     }
+
+    /** Retire un point de la liste des points du plan et actualise nbPoints
+     * 
+     * @param point
+     * @return true si le point a pu être retiré, false sinon.
+     */
 
     public boolean removePoint(Point point) {
         if (this.points.remove(point)){
@@ -88,6 +99,18 @@ public class Plan {
             return true;
         }
         return false;
+    }
+
+    //////// METHODES k-means ///////////
+    
+    public void k_means() {
+        
+    }
+
+
+    ////////////////////////////////////
+    public static void main(String[] args) {
+        
     }
 
 }
