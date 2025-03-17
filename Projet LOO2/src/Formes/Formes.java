@@ -35,7 +35,6 @@ public class Formes{
     }
 
     public int getRandomNumber() {
-        System.out.println("yay ");
         return (int) ((Math.random() * (255)));
     }
 

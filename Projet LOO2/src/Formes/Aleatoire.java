@@ -11,6 +11,7 @@ public class Aleatoire extends Formes{
     public Aleatoire(Point centre){
         this.setCentre(centre);
         this.setRandomRGB();
+        System.out.println("yay");
     }
     
 
