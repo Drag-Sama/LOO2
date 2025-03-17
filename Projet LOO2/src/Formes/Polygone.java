@@ -56,6 +56,24 @@ public class Polygone extends Formes{
         points = Arrays.copyOf(points, j);
     }
 
+    public void metOrdre(){
+        //On calcule le centre des points
+        int moyX = 0, moyY = 0;
+        for(int i = 0; i < nbPoints; i++){
+            moyX += points[i].getX();
+            moyY += points[i].getY();
+        }
+        moyY  = moyY/nbPoints;
+        moyX = moyX/nbPoints;
+
+        Double[] angle = new Double[nbPoints];
+
+        for(int i = 0; i < nbPoints; i++){
+            angle[i] = Math.tan((moyY - points[i].getY()) / (moyX - points[i].getX()));
+        }
+        
+    }
+
     public static void main(String[] args) {
         Point[] testPoints =new Point[50];
         Point centre = new Point(0, 0);

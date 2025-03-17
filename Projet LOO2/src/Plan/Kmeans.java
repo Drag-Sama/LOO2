@@ -1,6 +1,7 @@
 package Plan;
 
 import Point.Point;
+import java.util.Random;
 
 public class Kmeans {
     private int nbClusters;
@@ -36,9 +37,10 @@ public class Kmeans {
     public void k_means() {
         //float[] distances = new float[this.plan.getNbPoints()];
         Point[] arrayPoints;
+        Random rand = new Random();
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         boolean centresModif = true;
-        for (int i = 0; i < nbClusters; i++) centres[i] = arrayPoints[i];
+        for (int i = 0; i < nbClusters; i++) centres[i] = arrayPoints[rand.nextInt((plan.getNbPoints()))];
         while (centresModif) { // tant que les centres ont été modifiés (à chaque itération) :
             for (int i = 0; i < this.plan.getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
                 indicesCentres[i] = arrayPoints[i].getMinDistPoint(centres); // on attribue le centre d'indice min au point i
