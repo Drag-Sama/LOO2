@@ -24,6 +24,7 @@ public class Dessin extends PApplet{
     }
 
     public void draw(){
+        
         plan = new Plan();
         
         Point point = new Point(50, 150);
@@ -38,14 +39,27 @@ public class Dessin extends PApplet{
         Point point4 = new Point(500, 250);
         plan.addPoint(point4);
 
+        Point point5 = new Point(653,452);
+        plan.addPoint(point5);
+
+        Point point6 = new Point(231,321);
+        plan.addPoint(point6);
+        
+
         Kmeans km = new Kmeans(plan, 2);
         km.k_means();
 
-        for(int i = 0; i < km.getNbClusters();i++){
-            strokeWeight(4);
+        strokeWeight(4);
+        for(int i = 0; i < 2;i++){
             stroke(0,0,0);
-            System.out.println(km.getCentres()[i].getX());
+            System.out.println(i + ": " + km.getCentres()[i].getX() + " " + km.getCentres()[i].getY());
             point(km.getCentres()[i].getX(), km.getCentres()[i].getY());
+        }
+        Point[] arrayPoints = new Point[this.plan.getNbPoints()];
+        arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
+        for(int i = 0; i < plan.getNbPoints();i++){
+            stroke(255,0,0);
+            point(arrayPoints[i].getX(),arrayPoints[i].getY());
         }
         
     }

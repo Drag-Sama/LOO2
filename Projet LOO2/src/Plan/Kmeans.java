@@ -55,9 +55,8 @@ public class Kmeans {
                 }
                 nv_x /= nb; // on calcule les moyennes des x et y obtenues -> nouveau centre
                 nv_y /= nb;
-                System.out.println("nv x : " + nv_x);
                 Point nvCentre = new Point(nv_x, nv_y);
-                if (nvCentre.getX() != centres[i].getX() && nvCentre.getY() != centres[i].getY()) centresModif = true;
+                if (nvCentre.getX() != centres[i].getX() || nvCentre.getY() != centres[i].getY()) centresModif = true;
                 centres[i] = nvCentre;
             }
         }
