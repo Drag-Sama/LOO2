@@ -41,7 +41,7 @@ public class Point {
      */
     public int getMinDistPoint(Point[] points) {
         int min = 0;
-        for (int i = 0; i < points.length; i++) {
+        for (int i = 0; i < points.length; i++) { // pour tous les points de la liste
             if (this.getDist(points[i]) <= this.getDist(points[min])) {
                 min = i;
             }

@@ -57,27 +57,33 @@ public class Polygone extends Formes{
         points = Arrays.copyOf(points, j);
     }
 
-    public void metOrdre(){
+    /**
+     * Permet de mettre les points du polygone dans l'ordre selon l'angle avec leur centre
+     */
+    public void triPoints(){
         //On calcule le centre des points
         int moyX = 0, moyY = 0;
-        for(int i = 0; i < nbPoints; i++){
+        for(int i = 0; i < nbPoints; i++){ // pour tous les points du polygone
             moyX += points[i].getX();
             moyY += points[i].getY();
         }
         moyY  = moyY/nbPoints;
         moyX = moyX/nbPoints;
 
+        //On calcule l'angle des points avec le centre 
         Double[] angle = new Double[nbPoints];
 
-        for(int i = 0; i < nbPoints; i++){
+        for(int i = 0; i < nbPoints; i++){ // pour tous les points du polygone
             angle[i] = Math.tan((moyY - points[i].getY()) / (moyX - points[i].getX()));
         }
+
+        //On tri les points selon leur angle pour les mettres dans l'ordre
         HashSet<Integer> pointUsed = new HashSet<Integer>();
         int nbPointUsed = 0;
         while(nbPointUsed != nbPoints){
             double minAngle = 360;
             int j = 0;
-            for(int i = 0; i < nbPoints; i++){
+            for(int i = 0; i < nbPoints; i++){// pour tous les points du polygone
                 if(angle[i] < minAngle && pointUsed.contains(i)){
                     minAngle = angle[i];
                     j = i;

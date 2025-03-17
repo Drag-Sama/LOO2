@@ -51,9 +51,9 @@ public class Dessin extends PApplet{
         poly.addPoint(point3);
         poly.addPoint(point6);
         poly.addPoint(point);
-        poly.metOrdre();
+        poly.triPoints();
         plan.addForme(poly);
-
+        
        
 
         Kmeans km = new Kmeans(plan, 3);
@@ -90,7 +90,7 @@ public class Dessin extends PApplet{
      * @param actForme la forme que l'on souhaite dessiner
      */
     public void drawForme(Formes actForme){
-        strokeWeight(3);
+        strokeWeight(2);
         stroke(actForme.getR(), actForme.getG(), actForme.getB());
         noFill();
         if(actForme instanceof Cercle){//Si c'est un cercle
