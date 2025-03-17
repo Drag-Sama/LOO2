@@ -7,6 +7,7 @@ import Formes.Aleatoire;
 import Formes.Cercle;
 import Formes.Ellipse;
 import Formes.Formes;
+import Plan.Kmeans;
 import Plan.Plan;
 import Point.Point;
 
@@ -28,35 +29,23 @@ public class Dessin extends PApplet{
         Point point = new Point(50, 150);
         plan.addPoint(point);
 
-        Point point2 = new Point(452, 563);
+        Point point2 = new Point(60, 80);
         plan.addPoint(point2);
-        
-        HashSet<Point> points = plan.getPoints();
-        for (Point actPoint : points) {
+
+        Point point3 = new Point(450, 300);
+        plan.addPoint(point3);
+
+        Point point4 = new Point(500, 250);
+        plan.addPoint(point4);
+
+        Kmeans km = new Kmeans(plan, 2);
+        km.k_means();
+
+        for(int i = 0; i < km.getNbClusters();i++){
             strokeWeight(4);
-            stroke(0,0 ,255);
-            point(actPoint.getX(), actPoint.getY());
-        }
-        
-
-        Point point3 = new Point(70, 200);
-        Cercle cercle = new Cercle(100, point3);
-        plan.addForme(cercle);
-
-        Point point4 = new Point(453, 486);
-        Ellipse ellipse = new Ellipse(145,70,point4);
-        plan.addForme(ellipse);
-
-        Aleatoire alea = new Aleatoire(point4);
-        alea.addPoint(point);
-        alea.addPoint(point2);
-        alea.addPoint(point3);
-        alea.addPoint(point4);
-        plan.addForme(alea);
-
-        HashSet<Formes> formes = plan.getFormes();
-        for (Formes actForme : formes) {
-            drawForme(actForme);
+            stroke(0,0,0);
+            System.out.println(km.getCentres()[i].getX());
+            point(km.getCentres()[i].getX(), km.getCentres()[i].getY());
         }
         
     }

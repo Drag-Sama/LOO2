@@ -33,7 +33,7 @@ public class Kmeans {
     public void k_means() {
         float[] distances = new float[this.plan.getNbPoints()];
         Point[] arrayPoints = new Point[this.plan.getNbPoints()];
-        arrayPoints = (Point[]) this.plan.getPoints().toArray();
+        this.plan.getPoints().toArray(arrayPoints);
         boolean centresModif = true;
         for (int i = 0; i < nbClusters; i++) centres[i] = arrayPoints[i];
         while (centresModif) { // tant que les centres ont été modifiés (à chaque itération) :
