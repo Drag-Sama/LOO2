@@ -11,7 +11,7 @@ import Plan.Plan;
 import Point.Point;
 
 public class Dessin extends PApplet{
-
+    
     Plan plan;
 
     public void settings(){
@@ -24,6 +24,7 @@ public class Dessin extends PApplet{
 
     public void draw(){
         plan = new Plan();
+        
         Point point = new Point(50, 150);
         plan.addPoint(point);
 
@@ -32,7 +33,7 @@ public class Dessin extends PApplet{
         
         HashSet<Point> points = plan.getPoints();
         for (Point actPoint : points) {
-            strokeWeight(2);
+            strokeWeight(4);
             stroke(0,0 ,255);
             point(actPoint.getX(), actPoint.getY());
         }
@@ -54,29 +55,39 @@ public class Dessin extends PApplet{
         plan.addForme(alea);
 
         HashSet<Formes> formes = plan.getFormes();
-        for (Formes actFormes : formes) {
-            if(actFormes instanceof Cercle){//Si c'est un cercle
-                circle(actFormes.getCentre().getX(),actFormes.getCentre().getY(), ((Cercle)actFormes).getRayon());
-            }
-            else if(actFormes instanceof Ellipse){//Si c'est une ellipse
-                ellipse(actFormes.getCentre().getX(),actFormes.getCentre().getY(), ((Ellipse)actFormes).getLargeur(),((Ellipse)actFormes).getLongueur());
-            }
-            else{//Si c'est une forme aleatoire
-                Point prevPoint = new Point(-1,-1);
-                Point actPoint = new Point(-1, -1);
-                for (int i = 1; i < ((Aleatoire)actFormes).getNbPoints(); i++) {
-                    prevPoint = ((Point[])((Aleatoire)actFormes).getPoints().toArray())[i-1];
-                    actPoint  = ((Point[])((Aleatoire)actFormes).getPoints().toArray())[i];
-                    line(prevPoint.getX(), prevPoint.getY(), actPoint.getX(), actPoint.getY()); 
-                    
-                    
-                }
-                prevPoint = ((Point[])((Aleatoire)actFormes).getPoints().toArray())[((Aleatoire)actFormes).getNbPoints()];
-                actPoint  = ((Point[])((Aleatoire)actFormes).getPoints().toArray())[0];
-                line(prevPoint.getX(), prevPoint.getY(), actPoint.getX(), actPoint.getY()); 
-            }
+        for (Formes actForme : formes) {
+            drawForme(actForme);
         }
         
+    }
+
+    /**
+     * Permet de dessiner une forme selon sa nature
+     * @param actForme
+     */
+    public void drawForme(Formes actForme){
+        strokeWeight(3);
+        stroke(actForme.getR(), actForme.getG(), actForme.getB());
+        noFill();
+        if(actForme instanceof Cercle){//Si c'est un cercle
+            circle(actForme.getCentre().getX(),actForme.getCentre().getY(), ((Cercle)actForme).getRayon());
+        }
+        else if(actForme instanceof Ellipse){//Si c'est une ellipse
+            ellipse(actForme.getCentre().getX(),actForme.getCentre().getY(), ((Ellipse)actForme).getLargeur(),((Ellipse)actForme).getLongueur());
+        }
+        else{//Si c'est une forme aleatoire
+            Point prevPoint = new Point(-1,-1);
+            Point actPoint = new Point(-1, -1);
+            Point[] listPoints =  ((Aleatoire)actForme).getPoints();
+            for (int i = 1; i < ((Aleatoire)actForme).getNbPoints(); i++) {
+                prevPoint = listPoints[i-1];
+                actPoint  = listPoints[i];
+                line(prevPoint.getX(), prevPoint.getY(), actPoint.getX(), actPoint.getY()); 
+            }
+            prevPoint = listPoints[((Aleatoire)actForme).getNbPoints()-1];
+            actPoint  = listPoints[0];
+            line(prevPoint.getX(), prevPoint.getY(), actPoint.getX(), actPoint.getY()); 
+        }
     }
     
     public static void main(String[] args) {

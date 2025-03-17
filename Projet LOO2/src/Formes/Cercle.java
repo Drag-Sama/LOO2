@@ -7,6 +7,7 @@ public class Cercle extends Formes {
     public Cercle(float rayon, Point nvCentre){
         setCentre(nvCentre);
         setRayon(rayon);
+        this.setRandomRGB();
     }
 
     public float getRayon() {
