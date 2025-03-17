@@ -7,6 +7,7 @@ import Point.Point;
 public class Polygone extends Formes{
     private int nbPoints = 0;
     private Point[] points = new Point[50];
+    private Point[] pointsOrdre = new Point[50];
 
     public Polygone(Point centre){
         this.setCentre(centre);
