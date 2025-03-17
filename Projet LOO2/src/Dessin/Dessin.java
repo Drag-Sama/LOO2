@@ -1,8 +1,6 @@
 package Dessin;
 import processing.core.PApplet;
 
-import java.util.HashSet;
-
 import Formes.Aleatoire;
 import Formes.Cercle;
 import Formes.Ellipse;
@@ -24,9 +22,8 @@ public class Dessin extends PApplet{
     }
 
     public void draw(){
-        
         plan = new Plan();
-        
+        background(255);
         Point point = new Point(50, 150);
         plan.addPoint(point);
 
