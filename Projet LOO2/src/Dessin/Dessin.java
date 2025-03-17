@@ -1,7 +1,7 @@
 package Dessin;
 import processing.core.PApplet;
 
-import Formes.Aleatoire;
+import Formes.Polygone;
 import Formes.Cercle;
 import Formes.Ellipse;
 import Formes.Formes;
@@ -62,7 +62,8 @@ public class Dessin extends PApplet{
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         System.out.println("Points : ");
         for(int i = 0; i < plan.getNbPoints();i++){
-            System.out.println(i + ": " + arrayPoints[i].getX() + " " + arrayPoints[i].getY());
+            System.out.println(i + ": " + arrayPoints[i].getX() + " " + arrayPoints[i].getY());strokeWeight(4);
+            strokeWeight(3);
             stroke(255,0,0);
             point(arrayPoints[i].getX(),arrayPoints[i].getY());
         }
@@ -75,7 +76,7 @@ public class Dessin extends PApplet{
 
     /**
      * Permet de dessiner une forme selon sa nature
-     * @param actForme
+     * @param actForme la forme que l'on souhaite dessiner
      */
     public void drawForme(Formes actForme){
         strokeWeight(3);
@@ -87,18 +88,18 @@ public class Dessin extends PApplet{
         else if(actForme instanceof Ellipse){//Si c'est une ellipse
             ellipse(actForme.getCentre().getX(),actForme.getCentre().getY(), ((Ellipse)actForme).getLargeur(),((Ellipse)actForme).getLongueur());
         }
-        else{//Si c'est une forme aleatoire
+        else{//Si c'est une forme Polygone
             Point prevPoint = new Point(-1,-1);
             Point actPoint = new Point(-1, -1);
-            Point[] listPoints =  ((Aleatoire)actForme).getPoints();
-            for (int i = 1; i < ((Aleatoire)actForme).getNbPoints(); i++) {
+            Point[] listPoints =  ((Polygone)actForme).getPoints();
+            for (int i = 1; i < ((Polygone)actForme).getNbPoints(); i++) {
                 prevPoint = listPoints[i-1];
                 actPoint  = listPoints[i];
                 //trrace une ligne entre le point i-1 et le point 1
                 line(prevPoint.getX(), prevPoint.getY(), actPoint.getX(), actPoint.getY()); 
             }
             //trace une ligne entre le dernier et le premier point de la forme
-            prevPoint = listPoints[((Aleatoire)actForme).getNbPoints()-1];
+            prevPoint = listPoints[((Polygone)actForme).getNbPoints()-1];
             actPoint  = listPoints[0];
             line(prevPoint.getX(), prevPoint.getY(), actPoint.getX(), actPoint.getY()); 
         }

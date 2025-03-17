@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 import Point.Point;
 
-public class Aleatoire extends Formes{
+public class Polygone extends Formes{
     private int nbPoints = 0;
     private Point[] points = new Point[50];
 
-    public Aleatoire(Point centre){
+    public Polygone(Point centre){
         this.setCentre(centre);
         this.setRandomRGB();
         System.out.println("yay");
@@ -58,7 +58,7 @@ public class Aleatoire extends Formes{
     public static void main(String[] args) {
         Point[] testPoints =new Point[50];
         Point centre = new Point(0, 0);
-        Aleatoire a = new Aleatoire(centre);
+        Polygone a = new Polygone(centre);
         testPoints = a.getPoints();
         a.setPoints(testPoints);
         int testNbPoints = a.getNbPoints();
