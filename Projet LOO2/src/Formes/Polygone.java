@@ -1,6 +1,7 @@
 package Formes;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 import Point.Point;
 
@@ -70,6 +71,21 @@ public class Polygone extends Formes{
 
         for(int i = 0; i < nbPoints; i++){
             angle[i] = Math.tan((moyY - points[i].getY()) / (moyX - points[i].getX()));
+        }
+        HashSet<Integer> pointUsed = new HashSet<Integer>();
+        int nbPointUsed = 0;
+        while(nbPointUsed != nbPoints){
+            double minAngle = 360;
+            int j = 0;
+            for(int i = 0; i < nbPoints; i++){
+                if(angle[i] < minAngle && pointUsed.contains(i)){
+                    minAngle = angle[i];
+                    j = i;
+                }
+            }
+            pointUsed.add(j);
+            nbPointUsed += 1;
+            pointsOrdre[nbPointUsed] = points[j];
         }
         
     }

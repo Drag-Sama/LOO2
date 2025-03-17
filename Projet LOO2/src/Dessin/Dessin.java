@@ -44,6 +44,17 @@ public class Dessin extends PApplet{
         Point point6 = new Point(231,321);
         plan.addPoint(point6);
         
+        Polygone poly = new Polygone(point6);
+        poly.addPoint(point2);
+        poly.addPoint(point4);
+        poly.addPoint(point5);
+        poly.addPoint(point3);
+        poly.addPoint(point6);
+        poly.addPoint(point);
+        poly.metOrdre();
+        plan.addForme(poly);
+
+       
 
         Kmeans km = new Kmeans(plan, 3);
         km.k_means();
@@ -67,7 +78,7 @@ public class Dessin extends PApplet{
             stroke(255,0,0);
             point(arrayPoints[i].getX(),arrayPoints[i].getY());
         }
-
+        drawForme(poly);
         Scanner myScanner = new Scanner(System.in);
         myScanner.next();
         myScanner.close();
