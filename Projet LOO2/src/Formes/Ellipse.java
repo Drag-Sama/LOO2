@@ -10,7 +10,7 @@ public class Ellipse extends Formes {
         setCentre(centre);
         setLargeur(nvLargeur);
         setLongueur(nvLongueur);
-
+        this.setRandomRGB();
     }
 
     public float getLargeur() {

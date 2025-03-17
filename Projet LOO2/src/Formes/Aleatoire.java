@@ -1,23 +1,25 @@
 package Formes;
 
-import java.util.LinkedHashSet;
+import java.util.Arrays;
 
 import Point.Point;
 
 public class Aleatoire extends Formes{
     private int nbPoints = 0;
-    private LinkedHashSet<Point> points = new LinkedHashSet<Point>();
+    private Point[] points = new Point[50];
 
     public Aleatoire(Point centre){
         this.setCentre(centre);
+        this.setRandomRGB();
+        System.out.println("yay");
     }
     
 
-    public LinkedHashSet<Point> getPoints() {
+    public Point[] getPoints() {
         return points;
     }
 
-    public void setPoints(LinkedHashSet<Point> points) {
+    public void setPoints(Point[] points) {
         this.points = points;
     }
 
@@ -34,7 +36,7 @@ public class Aleatoire extends Formes{
      * @param newPoint
      */
     public void addPoint(Point newPoint){
-        this.points.add(newPoint);
+        this.points[nbPoints] = newPoint;
         this.nbPoints += 1;
     }
 
@@ -43,16 +45,18 @@ public class Aleatoire extends Formes{
      * @param point
      * @return true si on a pu retirer le point, false sinon.
      */
-    public boolean removePoint(Point point){
-        if(this.points.remove(point)) {
-            this.nbPoints -= 1;
-            return true;
+    public void removePoint(Point point){
+        int j = 0;
+        for(int i = 0; i < nbPoints; i++){
+            if(points[i] != point){
+                points[j++] = points[i]; 
+            }
         }
-        return false; 
+        points = Arrays.copyOf(points, j);
     }
 
     public static void main(String[] args) {
-        LinkedHashSet<Point> testPoints = new LinkedHashSet<Point>();
+        Point[] testPoints =new Point[50];
         Point centre = new Point(0, 0);
         Aleatoire a = new Aleatoire(centre);
         testPoints = a.getPoints();
