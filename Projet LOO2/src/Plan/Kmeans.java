@@ -6,7 +6,8 @@ public class Kmeans {
     private int nbClusters;
     private Point[] centres;
     private Plan plan;
-    private int[] indicesCentres;
+    private int[] indicesCentres; // liste d'entiers représentant l'indice (dans la liste) des
+                                  // centres attribuées aux points;
 
 
 
@@ -14,7 +15,8 @@ public class Kmeans {
         this.plan = plan;
         this.nbClusters = clusters;
         this.centres = new Point[nbClusters];
-        this.indicesCentres = new int[this.plan.getNbPoints()]; // liste d'entiers représentant l'indice (dans la liste) des centres attribuées aux points;
+        this.indicesCentres = new int[this.plan.getNbPoints()];
+
     }
 
     public int getNbClusters() {return this.nbClusters;}
@@ -28,8 +30,9 @@ public class Kmeans {
 
     /**
      * réalise l'algorithme k-means classique  pour le plan en attribut en utilisant tous les points de celui-ci
-     * @param
-     */
+     * pas de params
+     * pas de return -> tout en effet de bord sur ses propres attributs.
+     * */
     public void k_means() {
         //float[] distances = new float[this.plan.getNbPoints()];
         Point[] arrayPoints;
