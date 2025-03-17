@@ -9,6 +9,8 @@ import Plan.Kmeans;
 import Plan.Plan;
 import Point.Point;
 
+import java.util.Scanner;
+
 public class Dessin extends PApplet{
     
     Plan plan;
@@ -46,18 +48,31 @@ public class Dessin extends PApplet{
         Kmeans km = new Kmeans(plan, 2);
         km.k_means();
 
-        strokeWeight(4);
+        
+        System.out.println("Centres : ");
         for(int i = 0; i < 2;i++){
             stroke(0,0,0);
             System.out.println(i + ": " + km.getCentres()[i].getX() + " " + km.getCentres()[i].getY());
+            
+            Point maxPoint = km.maxDistCluster(i);
+            System.out.println(maxPoint);
+            strokeWeight(2);
+            circle(km.getCentres()[i].getX(), km.getCentres()[i].getY(), maxPoint.getDist(km.getCentres()[i]) * 2);
+            strokeWeight(4);
             point(km.getCentres()[i].getX(), km.getCentres()[i].getY());
         }
         Point[] arrayPoints = new Point[this.plan.getNbPoints()];
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
+        System.out.println("Points : ");
         for(int i = 0; i < plan.getNbPoints();i++){
+            System.out.println(i + ": " + arrayPoints[i].getX() + " " + arrayPoints[i].getY());
             stroke(255,0,0);
             point(arrayPoints[i].getX(),arrayPoints[i].getY());
         }
+
+        Scanner myScanner = new Scanner(System.in);
+        myScanner.nextLine();
+        myScanner.close();
         
     }
 

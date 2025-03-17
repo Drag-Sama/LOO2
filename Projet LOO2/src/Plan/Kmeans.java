@@ -31,7 +31,7 @@ public class Kmeans {
      * @param
      */
     public void k_means() {
-        float[] distances = new float[this.plan.getNbPoints()];
+        //float[] distances = new float[this.plan.getNbPoints()];
         Point[] arrayPoints;
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         boolean centresModif = true;
@@ -60,6 +60,23 @@ public class Kmeans {
                 centres[i] = nvCentre;
             }
         }
+    }
+
+    public Point maxDistCluster(int idCluster){
+        Point[] arrayPoints;
+        float maxDist = 0;
+        Point maxPoint = null;
+        arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
+        for(int i = 0; i < plan.getNbPoints(); i++){
+            if(indicesCentres[i] == idCluster){
+                float dist = centres[idCluster].getDist(arrayPoints[i]);
+                if(dist > maxDist){
+                    maxDist = dist;
+                    maxPoint = arrayPoints[i];
+                }
+            }
+        }
+        return maxPoint;
     }
 
     public static void main(String[] args) {

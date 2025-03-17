@@ -1,5 +1,6 @@
 package Plan;
 
+import java.util.LinkedHashSet;
 import java.util.HashSet;
 
 import Formes.Formes;
@@ -8,7 +9,7 @@ import Point.Point;
 public class Plan {
     private HashSet<Formes> formes = new HashSet<Formes>();
     private int nbFormes;
-    private HashSet<Point> points = new HashSet<Point>();
+    private LinkedHashSet<Point> points = new LinkedHashSet<Point>();
     private int nbPoints;
 
     public Plan() {
@@ -22,7 +23,7 @@ public class Plan {
         return formes;
     }
 
-    public HashSet<Point> getPoints() {
+    public LinkedHashSet<Point> getPoints() {
         return points;
     }
 
@@ -34,11 +35,11 @@ public class Plan {
         return nbPoints;
     }
 
-    public void setFormes(HashSet<Formes> formes) {
+    public void setFormes(LinkedHashSet<Formes> formes) {
         this.formes = formes;
     }
 
-    public void setPoints(HashSet<Point> points) {
+    public void setPoints(LinkedHashSet<Point> points) {
         this.points = points;
     }
 
