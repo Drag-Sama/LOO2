@@ -39,7 +39,7 @@ public class Point {
      * @param points à comparer
      * @return
      */
-    public int getminDistPoint(Point[] points) {
+    public int getMinDistPoint(Point[] points) {
         int min = 0;
         for (int i = 0; i < points.length; i++) {
             if (this.getDist(points[i]) <= this.getDist(points[min])) {
