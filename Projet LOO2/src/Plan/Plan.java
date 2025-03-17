@@ -99,14 +99,14 @@ public class Plan {
         return false;
     }
 
-    //////// METHODES k-means ///////////
-
-
-
-
-    ////////////////////////////////////
-    public static void main(String[] args) {
-        
+    @Override
+    public String toString() {
+        String str = "Plan : \n \t";
+        return str;
     }
 
+
+    public static void main(String[] args) {
+
+    }
 }
