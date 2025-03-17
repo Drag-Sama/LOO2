@@ -31,7 +31,7 @@ public class Point {
      * @return la distance entre les deux points
      */
     public float getDist(Point a){
-        return Math.abs(this.x - a.getX() + this.y - a.getY());
+        return Math.abs(this.x - a.getX()) + Math.abs(this.y - a.getY());
     }
 
     /**

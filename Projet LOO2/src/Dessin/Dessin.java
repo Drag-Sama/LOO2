@@ -45,19 +45,16 @@ public class Dessin extends PApplet{
         plan.addPoint(point6);
         
 
-        Kmeans km = new Kmeans(plan, 2);
+        Kmeans km = new Kmeans(plan, 3);
         km.k_means();
 
         
         System.out.println("Centres : ");
-        for(int i = 0; i < 2;i++){
+        for(int i = 0; i < 3;i++){
             stroke(0,0,0);
             System.out.println(i + ": " + km.getCentres()[i].getX() + " " + km.getCentres()[i].getY());
             
-            Point maxPoint = km.maxDistCluster(i);
-            System.out.println(maxPoint);
-            strokeWeight(2);
-            circle(km.getCentres()[i].getX(), km.getCentres()[i].getY(), maxPoint.getDist(km.getCentres()[i]) * 2);
+           
             strokeWeight(4);
             point(km.getCentres()[i].getX(), km.getCentres()[i].getY());
         }
@@ -71,7 +68,7 @@ public class Dessin extends PApplet{
         }
 
         Scanner myScanner = new Scanner(System.in);
-        myScanner.nextLine();
+        myScanner.next();
         myScanner.close();
         
     }
@@ -97,8 +94,10 @@ public class Dessin extends PApplet{
             for (int i = 1; i < ((Aleatoire)actForme).getNbPoints(); i++) {
                 prevPoint = listPoints[i-1];
                 actPoint  = listPoints[i];
+                //trrace une ligne entre le point i-1 et le point 1
                 line(prevPoint.getX(), prevPoint.getY(), actPoint.getX(), actPoint.getY()); 
             }
+            //trace une ligne entre le dernier et le premier point de la forme
             prevPoint = listPoints[((Aleatoire)actForme).getNbPoints()-1];
             actPoint  = listPoints[0];
             line(prevPoint.getX(), prevPoint.getY(), actPoint.getX(), actPoint.getY()); 
