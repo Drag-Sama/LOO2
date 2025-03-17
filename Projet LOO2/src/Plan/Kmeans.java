@@ -32,21 +32,13 @@ public class Kmeans {
      */
     public void k_means() {
         float[] distances = new float[this.plan.getNbPoints()];
-        Point[] arrayPoints = new Point[this.plan.getNbPoints()];
+        Point[] arrayPoints;
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         boolean centresModif = true;
         for (int i = 0; i < nbClusters; i++) centres[i] = arrayPoints[i];
         while (centresModif) { // tant que les centres ont été modifiés (à chaque itération) :
             for (int i = 0; i < this.plan.getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
-                //entre ce point et chacun des centres et l'on attribue le centre le plus proche à chacun des points
-                int min = 0;
-                for (int j = 0; j < centres.length; j++) { // pour chaque centres
-                    distances[j] = arrayPoints[i].getDist(centres[j]); // on calcule la distance entre le point i et le centre j (indices)
-                    if (distances[j] <= distances[min]) { // si la distance actuelle et la plus petite, min devient l'indice i
-                        min = i;
-                    }
-                }
-                indicesCentres[i] = min; // on attribue le centre d'indice min au point i
+                indicesCentres[i] = arrayPoints[i].getMinDistPoint(centres); // on attribue le centre d'indice min au point i
             }
             centresModif = false;
             for (int i = 0; i < nbClusters; i++) { // pour chaque cluster
@@ -56,11 +48,14 @@ public class Kmeans {
                 for (int j = 0; j < this.plan.getNbPoints(); j++) { // pour chaque points, on vérifie si son centre est d'indice i
                     if (indicesCentres[j] == i) {
                         ; // si oui -> ajoute son x et y
+                        nv_x += arrayPoints[j].getX();
+                        nv_y += arrayPoints[j].getY();
                         nb++;
                     }
                 }
                 nv_x /= nb; // on calcule les moyennes des x et y obtenues -> nouveau centre
                 nv_y /= nb;
+                System.out.println("nv x : " + nv_x);
                 Point nvCentre = new Point(nv_x, nv_y);
                 if (nvCentre.getX() != centres[i].getX() && nvCentre.getY() != centres[i].getY()) centresModif = true;
                 centres[i] = nvCentre;
