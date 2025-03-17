@@ -9,6 +9,7 @@ import Plan.Kmeans;
 import Plan.Plan;
 import Point.Point;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Dessin extends PApplet{
@@ -24,6 +25,22 @@ public class Dessin extends PApplet{
     }
 
     public void draw(){
+        Scanner scan = new Scanner(System.in);
+        int act_save = 0; // indice de la sauvegarde actuelle.
+        drawKmeans();
+        scan.next();
+        scan.close();
+    }
+
+
+
+    /**
+     * Actuellement un simple test pour kmeans
+     * pas de param
+     * pas de return
+     */
+
+    public void drawKmeans() {
         plan = new Plan();
         background(255);
         Point point = new Point(50, 150);
@@ -43,6 +60,7 @@ public class Dessin extends PApplet{
 
         Point point6 = new Point(231,321);
         plan.addPoint(point6);
+<<<<<<< Updated upstream
         
         Polygone poly = new Polygone(point6);
         poly.addPoint(point2);
@@ -55,21 +73,24 @@ public class Dessin extends PApplet{
         plan.addForme(poly);
         
        
+=======
+
+>>>>>>> Stashed changes
 
         Kmeans km = new Kmeans(plan, 3);
         km.k_means();
 
-        
+
         System.out.println("Centres : ");
         for(int i = 0; i < 3;i++){
             stroke(0,0,0);
             System.out.println(i + ": " + km.getCentres()[i].getX() + " " + km.getCentres()[i].getY());
-            
-           
+
+
             strokeWeight(4);
             point(km.getCentres()[i].getX(), km.getCentres()[i].getY());
         }
-        Point[] arrayPoints = new Point[this.plan.getNbPoints()];
+        Point[] arrayPoints;
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         System.out.println("Points : ");
         for(int i = 0; i < plan.getNbPoints();i++){
@@ -78,11 +99,15 @@ public class Dessin extends PApplet{
             stroke(255,0,0);
             point(arrayPoints[i].getX(),arrayPoints[i].getY());
         }
+<<<<<<< Updated upstream
         drawForme(poly);
         Scanner myScanner = new Scanner(System.in);
         myScanner.next();
         myScanner.close();
         
+=======
+
+>>>>>>> Stashed changes
     }
 
     /**
@@ -106,7 +131,7 @@ public class Dessin extends PApplet{
             for (int i = 1; i < ((Polygone)actForme).getNbPoints(); i++) {
                 prevPoint = listPoints[i-1];
                 actPoint  = listPoints[i];
-                //trrace une ligne entre le point i-1 et le point 1
+                //trace une ligne entre le point i-1 et le point 1
                 line(prevPoint.getX(), prevPoint.getY(), actPoint.getX(), actPoint.getY()); 
             }
             //trace une ligne entre le dernier et le premier point de la forme
