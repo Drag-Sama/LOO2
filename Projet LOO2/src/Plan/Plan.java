@@ -7,7 +7,7 @@ import Formes.Formes;
 import Point.Point;
 
 public class Plan {
-    private HashSet<Formes> formes = new HashSet<Formes>();
+    private LinkedHashSet<Formes> formes = new LinkedHashSet<Formes>();
     private int nbFormes;
     private LinkedHashSet<Point> points = new LinkedHashSet<Point>();
     private int nbPoints;
@@ -19,7 +19,7 @@ public class Plan {
 
     ///////// ACCESSEURS /////////////
 
-    public HashSet<Formes> getFormes() {
+    public LinkedHashSet<Formes> getFormes() {
         return formes;
     }
 
