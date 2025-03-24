@@ -27,6 +27,7 @@ public class Dessin extends PApplet{
     public void draw(){
         Scanner scan = new Scanner(System.in);
         int act_save = 0; // indice de la sauvegarde actuelle.
+        Plan p = new Plan();
         drawKmeans();
         scan.next();
         scan.close();
@@ -40,40 +41,35 @@ public class Dessin extends PApplet{
      * pas de return
      */
 
-    public void drawKmeans() {
-        plan = new Plan();
-        background(255);
-        Point point = new Point(50, 150);
-        plan.addPoint(point);
-
-        Point point2 = new Point(60, 80);
-        plan.addPoint(point2);
-
-        Point point3 = new Point(450, 300);
-        plan.addPoint(point3);
-
-        Point point4 = new Point(500, 250);
-        plan.addPoint(point4);
-
-        Point point5 = new Point(653,452);
-        plan.addPoint(point5);
-
-        Point point6 = new Point(231,321);
-        plan.addPoint(point6);
-
-
-        Kmeans km = new Kmeans(plan, 3);
-        km.k_means();
-
+    public void drawKmeans(Plan plan,Kmeans km) {
+//        plan = new Plan();
+//        background(255);
+//        Point point = new Point(50, 150);
+//        plan.addPoint(point);
+//
+//        Point point2 = new Point(60, 80);
+//        plan.addPoint(point2);
+//
+//        Point point3 = new Point(450, 300);
+//        plan.addPoint(point3);
+//
+//        Point point4 = new Point(500, 250);
+//        plan.addPoint(point4);
+//
+//        Point point5 = new Point(653,452);
+//        plan.addPoint(point5);
+//
+//        Point point6 = new Point(231,321);
+//        plan.addPoint(point6);
 
         System.out.println("Centres : ");
-        for(int i = 0; i < 3;i++){
+        for(int i = 0; i < km.getNbClusters();i++){
             stroke(0,0,0);
-            System.out.println(i + ": " + km.getCentres()[i].getX() + " " + km.getCentres()[i].getY());
+            System.out.println(i + ": " + km.getCentres()[i].getX() + " " + km.getCentres()[i].getY()); // afficher les coordonnées du centre
 
 
             strokeWeight(4);
-            point(km.getCentres()[i].getX(), km.getCentres()[i].getY());
+            point(km.getCentres()[i].getX(), km.getCentres()[i].getY()); // dessine ce centre
         }
         Point[] arrayPoints;
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
