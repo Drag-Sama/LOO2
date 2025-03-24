@@ -4,9 +4,10 @@ package Formes;
 import Point.Point;
 
 
-public class Formes{
+public abstract class Formes{
     private Point centre;
     int r = 0,g = 0,b = 0;
+
 
     public Point getCentre() {
         return centre;

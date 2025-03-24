@@ -1,7 +1,6 @@
 package Plan;
 
 import java.util.LinkedHashSet;
-import java.util.HashSet;
 
 import Formes.Formes;
 import Point.Point;
