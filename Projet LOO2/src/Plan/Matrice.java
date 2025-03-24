@@ -1,8 +1,14 @@
 package Plan;
 
+/**
+ * Matrice
+ * @param dimX La taille x de la matrice
+ * @param dimY La taille y de la matrice
+ * @param valeur Les valeurs de la matrice
+ */
 public class Matrice {
-    int dimX;
-    int dimY;
+    private int dimX;
+    private int dimY;
     float valeur[][];
 
     public Matrice(int nvDimX, int nvDimY){
@@ -21,13 +27,7 @@ public class Matrice {
         return dimY;
     }
 
-    public void setDimX(int dimX) {
-        this.dimX = dimX;
-    }
 
-    public void setDimY(int dimY) {
-        this.dimY = dimY;
-    }
 
 
     /**
@@ -90,5 +90,13 @@ public class Matrice {
             }
           }  
         return resultat;
+    }
+
+    public static void main(String[] args) {
+        Matrice m = new Matrice(1, 1);
+        m.getTransposee();
+        m.setValeur(0, 0, 1);
+        m.getValeur(0, 0);
+        m.multiplicationMatrice(m);
     }
 }
