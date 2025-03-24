@@ -74,7 +74,6 @@ public class Kmeans {
                         nb++;
                     }
                 }
-                nb = 0;
                 if (nb == 0) {
                     throw new ArithmeticException(); // pas de try catch pour celle-ci car la division par zéro ne cause pas d'erreur mais renvoie Infinity.
                 }
