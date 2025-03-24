@@ -1,5 +1,9 @@
 package Point;
 
+/**
+ * @param x Position x du point
+ * @param y Position y du point
+ */
 public class Point {
     float x;
     float y;
@@ -47,6 +51,17 @@ public class Point {
             }
         }
         return min;
+    }
+
+    public static void main(String[] args) {
+        Point[] lp = new Point[1];
+        Point p = new Point(0, 0);
+        p.setX(2);
+        p.setY(2);
+        lp[0] = p;
+
+        p.getMinDistPoint(lp);
+        p.getDist(p);
     }
 }
 

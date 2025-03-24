@@ -3,7 +3,11 @@ package Formes;
 
 import Point.Point;
 
-
+/**
+ * Forme
+ * @param centre Le centre de la forme
+ * @param r,g,b La couleur de la forme
+ */
 public abstract class Formes{
     private Point centre;
     int r = 0,g = 0,b = 0;
@@ -42,6 +46,7 @@ public abstract class Formes{
     public void setRandomRGB(){
         setRGB(getRandomNumber(), getRandomNumber(), getRandomNumber());
     }
+
 
 }
 

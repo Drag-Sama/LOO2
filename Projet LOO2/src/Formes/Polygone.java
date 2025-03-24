@@ -5,10 +5,14 @@ import java.util.HashSet;
 
 import Point.Point;
 
+/**
+ * Polygone
+ * @param nbPoints Nombre de points du polygone
+ * @param points Liste des points du polygone
+ */
 public class Polygone extends Formes{
     private int nbPoints = 0;
     private Point[] points = new Point[50];
-    private Point[] pointsOrdre = new Point[50];
 
     public Polygone(Point centre){
         this.setCentre(centre);
@@ -91,7 +95,7 @@ public class Polygone extends Formes{
             }
             pointUsed.add(j);
             nbPointUsed += 1;
-            pointsOrdre[nbPointUsed] = points[j];
+            points[nbPointUsed] = points[j];
         }
         
     }
