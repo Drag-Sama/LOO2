@@ -9,7 +9,6 @@ import Plan.Kmeans;
 import Plan.Plan;
 import Point.Point;
 
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Dessin extends PApplet{
@@ -26,7 +25,7 @@ public class Dessin extends PApplet{
 
     public void draw(){
         Scanner scan = new Scanner(System.in);
-        int act_save = 0; // indice de la sauvegarde actuelle.
+        //int act_save = 0; // indice de la sauvegarde actuelle.
         drawKmeans();
         scan.next();
         scan.close();
@@ -69,7 +68,6 @@ public class Dessin extends PApplet{
         System.out.println("Centres : ");
         for(int i = 0; i < 3;i++){
             stroke(0,0,0);
-            System.out.println(i + ": " + km.getCentres()[i].getX() + " " + km.getCentres()[i].getY());
 
 
             strokeWeight(4);
@@ -79,7 +77,6 @@ public class Dessin extends PApplet{
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         System.out.println("Points : ");
         for(int i = 0; i < plan.getNbPoints();i++){
-            System.out.println(i + ": " + arrayPoints[i].getX() + " " + arrayPoints[i].getY());strokeWeight(4);
             strokeWeight(3);
             stroke(255,0,0);
             point(arrayPoints[i].getX(),arrayPoints[i].getY());
@@ -87,6 +84,8 @@ public class Dessin extends PApplet{
 
         
     }
+
+   
 
     /**
      * Permet de dessiner une forme selon sa nature
