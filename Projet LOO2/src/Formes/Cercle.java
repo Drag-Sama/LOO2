@@ -25,7 +25,7 @@ public class Cercle extends Formes {
 
     @Override
     public String toString() {
-        return "Centre : " + this.getCentre().toString() + " Rayon : " + rayon;
+        return  this.getClass().getSimpleName() +  " Centre : " + this.getCentre().toString() + " Rayon : " + rayon;
     }
 
     public static void main(String[] args) {
@@ -33,5 +33,7 @@ public class Cercle extends Formes {
         Cercle c = new Cercle(3, p);
         c.setRayon(2);
         c.setCentre(p);
+        c.setRandomRGB();
+        System.out.println(c);
     }
 }

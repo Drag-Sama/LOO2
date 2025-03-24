@@ -48,7 +48,14 @@ public class Dessin extends PApplet{
         plan.addPoint(point6);
         Kmeans km = new Kmeans(plan,3);
         km.k_means();
-        drawKmeans(plan,km);
+        //drawKmeans(plan,km);
+
+        Cercle e = new Cercle(100, point6);
+        plan.addForme(e);
+        drawForme(e);
+
+        scan.nextLine();
+        scan.close();
     }
 
 

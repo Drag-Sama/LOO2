@@ -37,7 +37,7 @@ public class Ellipse extends Formes {
 
     @Override
     public String toString() {
-        return "Centre : " + this.getCentre().toString() + "Grand demi axe : " + longueur + " Petit demi axe : " + largeur;
+        return this.getClass().getSimpleName() +  " Centre : " + this.getCentre().toString() + "Grand demi axe : " + longueur + " Petit demi axe : " + largeur;
     }
 
     public static void main(String[] args) {
@@ -45,6 +45,7 @@ public class Ellipse extends Formes {
         Ellipse e = new Ellipse(0, 0, p);
         e.setLargeur(3);
         e.setLongueur(2);
+        System.out.println(e);
     }
     
 }
