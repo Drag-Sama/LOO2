@@ -83,6 +83,8 @@ public class Dessin extends PApplet{
         
     }
 
+    //draw Point ici
+
     /**
      * Permet de dessiner une forme selon sa nature
      * @param actForme la forme que l'on souhaite dessiner
