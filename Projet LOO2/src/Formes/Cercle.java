@@ -23,6 +23,11 @@ public class Cercle extends Formes {
         this.rayon = rayon;
     }
 
+    @Override
+    public String toString() {
+        return "Centre : " + this.getCentre().toString() + " Rayon : " + rayon;
+    }
+
     public static void main(String[] args) {
         Point p = new Point(0, 0);
         Cercle c = new Cercle(3, p);
