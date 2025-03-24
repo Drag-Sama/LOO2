@@ -53,6 +53,12 @@ public class Point {
         return min;
     }
 
+    @Override
+    public String toString() {
+        String s = this.getClass().getSimpleName() + " : \n \t X = " + this.getX() + "\t Y = " + this.getY() + "\n";
+        return s;
+    }
+
     public static void main(String[] args) {
         Point[] lp = new Point[1];
         Point p = new Point(0, 0);
@@ -62,6 +68,7 @@ public class Point {
 
         p.getMinDistPoint(lp);
         p.getDist(p);
+        System.out.println(p);
     }
 }
 

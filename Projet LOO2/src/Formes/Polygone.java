@@ -100,6 +100,15 @@ public class Polygone extends Formes{
         
     }
 
+    @Override
+    public String toString() {
+        String s = this.getClass().getSimpleName() + " : \n";
+        for (int i = 0; i < this.getNbPoints(); i++) {
+            s+= "\t -  " + this.getClass().getSimpleName();
+        }
+        return s;
+    }
+
     public static void main(String[] args) {
         Point[] testPoints =new Point[50];
         Point centre = new Point(0, 0);
@@ -111,5 +120,6 @@ public class Polygone extends Formes{
         Point point = new Point(1,2);
         a.addPoint(point);
         a.removePoint(point);
+        System.out.println(a);
     }
 }
