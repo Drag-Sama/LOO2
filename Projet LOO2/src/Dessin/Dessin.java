@@ -55,7 +55,8 @@ public class Dessin extends PApplet{
 
     /**
      * Actuellement un simple test pour kmeans
-     * pas de param
+     * @param plan
+     * @param km (Kmeans)
      * pas de return
      */
 
