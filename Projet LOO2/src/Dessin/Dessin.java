@@ -13,13 +13,21 @@ import exceptions.NegativeValue;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * Dessine les éléments du plan
+ * @param plan Le plan du dessin
+ */
 public class Dessin extends PApplet{
     
     Plan plan;
 
+    /**
+     * Permet de changer les paramètres de base du dessin
+     */
     public void settings(){
         size(1300, 800);
     }
+
 
     public void setup(){
         background(255);

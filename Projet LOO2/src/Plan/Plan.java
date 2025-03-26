@@ -63,16 +63,16 @@ public class Plan {
      * Permet de changer les formes du plan
      * @param formes Les nouvelles formes
      */
-    public void setFormes(LinkedHashSet<Formes> formes) {
-        this.formes = formes;
+    public void setFormes(LinkedHashSet<Formes> nvFormes) {
+        this.formes = nvFormes;
     }
 
     /**
      * Permet de changer les points du plan
      * @param points Les nouveaux points du plan
      */
-    public void setPoints(LinkedHashSet<Point> points) {
-        this.points = points;
+    public void setPoints(LinkedHashSet<Point> nvPoints) {
+        this.points = nvPoints;
     }
 
     /**
