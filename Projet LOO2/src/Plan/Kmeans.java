@@ -116,7 +116,7 @@ public class Kmeans {
      * pas de return -> tout en effet de bord sur ses propres attributs.
      * @throws ArithmeticException
      * */
-    public void k_means() throws ArithmeticException{
+    public void k_means() throws ArithmeticException, NegativeValue{
         Point[] arrayPoints;
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         Collections.shuffle(Arrays.asList(arrayPoints));
@@ -169,7 +169,7 @@ public class Kmeans {
      * @return true si l'un des centres a été modifié, false sinon.
      * @throws ArithmeticException → division par zéro dans le cas où lors du calcul des nouveaux centres, l'un d'eux n'est pas retrouvé dans la liste d'indices.
      */
-    public boolean k_meansOneStep() throws ArithmeticException{
+    public boolean k_meansOneStep() throws ArithmeticException, NegativeValue{
         boolean centresModif = false;
         Point[] arrayPoints;
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
@@ -191,7 +191,6 @@ public class Kmeans {
                     nb++;
                 }
             }
-            nb = 0;
             if (nb == 0) {
                 throw new ArithmeticException(); // pas de try catch pour celle-ci, car la division par zéro ne cause pas d'erreur mais renvoie Infinity.
             }

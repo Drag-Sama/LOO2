@@ -59,18 +59,21 @@ public class Dessin extends PApplet{
             Point point6 = new Point(231,321);
             plan.addPoint(point6);
             Kmeans km = new Kmeans(plan,3);
+            km.setupK_means();
             
             
-            System.out.println("Etape précédante : 0\nEtape suivante : 1");
+            System.out.println("Etape actuel : " + act_save + "\nNombre d'étape max : " + nb_save + " \n ------------ \nEtape précédente : 0\nEtape suivante : 1");
             int userAns = scan.nextInt();
 
             if(userAns == 1){
-                background(0);
-                if(act_save <= nb_save){
+                background(255);
+                
+                if(act_save == nb_save){
                     drawKmeans(plan,km);
-                    save("dessin" + act_save);
+                    save("StockDessin\\dessin" + act_save + ".jpg");
                     act_save += 1;
-                    }
+                    nb_save += 1;
+                }
                 else{
                     loadAndDrawImage();
                     act_save += 1;
@@ -78,17 +81,15 @@ public class Dessin extends PApplet{
             }
             else{
                 if(act_save > 0){
-                    loadAndDrawImage();
                     act_save -= 1;
+                    loadAndDrawImage();
                 }
                 else{
-                    System.out.println("Erreur, il n'y a pas d'étape précédante");
+                    System.out.println("Erreur, il n'y a pas d'étape précédente");
                 }
                 
             }
-            
-            
-            scan.close();
+
             
         }
         catch(NegativeValue e){
@@ -98,10 +99,9 @@ public class Dessin extends PApplet{
     }
 
     public void loadAndDrawImage(){
-        background(0);
-        PImage img = loadImage("dessin" + act_save);
+        background(255);
+        PImage img = loadImage("StockDessin\\dessin" + act_save + ".jpg");
         image(img, 0, 0);
-        nb_save += 1;
     }
 
 
@@ -113,7 +113,7 @@ public class Dessin extends PApplet{
      * pas de return
      */
     public void drawKmeans(Plan plan,Kmeans km) throws NegativeValue{
-        background(0);
+        background(255);
         km.k_meansOneStep();
         //Dessine le centre des clusters
         strokeWeight(5);
@@ -141,14 +141,14 @@ public class Dessin extends PApplet{
     }
 
     /**
-     * Dessine les formes de la liste passée en paramètre
-     * @param lFormes Liste de formes à dessiner
-     * @param nbFormes Nombre de formes à dessiner
+     * Dessine les Forme de la liste passée en paramètre
+     * @param lForme Liste de Forme à dessiner
+     * @param nbForme Nombre de Forme à dessiner
      * @throws NegativeValue
      */
-    public void drawAllFormes(Formes[] lFormes, int nbFormes)throws NegativeValue{
-        for(int i = 0; i < nbFormes; i++){ //Boucle for qui parcours les formes de la liste passée en paramètre
-            drawForme(lFormes[i]);
+    public void drawAllForme(Forme[] lForme, int nbForme)throws NegativeValue{
+        for(int i = 0; i < nbForme; i++){ //Boucle for qui parcours les Forme de la liste passée en paramètre
+            drawForme(lForme[i]);
         }
     }
 
