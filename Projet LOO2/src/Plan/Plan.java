@@ -2,9 +2,18 @@ package Plan;
 
 import java.util.LinkedHashSet;
 
+import Formes.Cercle;
 import Formes.Formes;
 import Point.Point;
+import exceptions.NegativeValue;
 
+/**
+ * Un plan permet de contenir des points et des formes
+ * @param formes Les formes qui sont dans le plan
+ * @param nbFormes Le nombre de formes dans le plan
+ * @param points Les points qui sont dans le plan
+ * @param nbPoints Le nombre de points dans le plan
+ */
 public class Plan {
     private LinkedHashSet<Formes> formes = new LinkedHashSet<Formes>();
     private int nbFormes;
@@ -106,7 +115,17 @@ public class Plan {
     }
 
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws NegativeValue {
+    Plan p = new Plan();
+    Point p2 = new Point(0, 0);
+    p.addPoint(p2);
+    Cercle c = new Cercle(0, p2);
+    p.getFormes();
+    p.getNbFormes();
+    p.getPoints();
+    p.getNbPoints();
+    p.addForme(c);
+    p.removePoint(p2);
+    p.removeForme(c);
     }
 }
