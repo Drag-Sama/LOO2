@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import Point.Point;
+import exceptions.NegativeValue;
 
 /**
  * Polygone
@@ -109,7 +110,7 @@ public class Polygone extends Formes{
         return s;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NegativeValue {
         Point[] testPoints =new Point[50];
         Point centre = new Point(0, 0);
         Polygone a = new Polygone(centre);

@@ -1,6 +1,7 @@
 package Plan;
 
 import Point.Point;
+import exceptions.NegativeValue;
 
 import java.util.*;
 
@@ -49,7 +50,7 @@ public class Kmeans {
      * pas de params
      * pas de return -> tout en effet de bord sur ses propres attributs.
      * */
-    public void k_means() throws ArithmeticException {
+    public void k_means() throws ArithmeticException, NegativeValue{
         Point[] arrayPoints;
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         Collections.shuffle(Arrays.asList(arrayPoints));
@@ -92,7 +93,7 @@ public class Kmeans {
      * réalise UNE itération de l'algo kmeans -> fonction pour dessiner étape par étape
      * @return true si l'un des centres a été modifié, false sinon.
      */
-    public boolean k_meansOneStep() throws ArithmeticException{
+    public boolean k_meansOneStep() throws ArithmeticException, NegativeValue{
         boolean centresModif = false;
         Point[] arrayPoints;
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
@@ -146,7 +147,7 @@ public class Kmeans {
         return maxPoint;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NegativeValue{
         Plan plan = new Plan();
 
         Point point = new Point(50, 150);
