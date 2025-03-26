@@ -15,12 +15,16 @@ import java.util.Scanner;
 /**
  * Dessine les éléments du plan
  * @param plan Le plan du dessin
+ * @param act_save Etape actuel du dessin
+ * @param nb_save Nombre d'étape effectuée
  */
 public class Dessin extends PApplet{
     
-    Plan plan;
+    Plan plan = new Plan();
     int act_save = 0; // indice de la sauvegarde actuelle.
     int nb_save = 0; //Nombre d'image sauvegardé et donc d'étape effectué 
+    Kmeans km = new Kmeans(plan,3);
+            
 
     /**
      * Permet de changer les paramètres de base du dessin
@@ -32,43 +36,29 @@ public class Dessin extends PApplet{
 
     public void setup(){
         background(255);
+        for(int i = 0; i < 7; i ++){
+            Point point = new Point(0,0);
+            point.setRandom(1300, 800);
+            plan.addPoint(point);
+        }
+        km.setPlan(plan);
+        km.setupK_means();
+        System.out.println("Setup terminé");
     }
 
     public void draw() {
         Scanner scan = new Scanner(System.in);
         
-        Plan plan = new Plan();
+       
         background(255);
         try{
-            
-            Point point = new Point(50, 150);
-            plan.addPoint(point);
-    
-            Point point2 = new Point(60, 80);
-            plan.addPoint(point2);
-    
-            Point point3 = new Point(450, 300);
-            plan.addPoint(point3);
-    
-            Point point4 = new Point(500, 250);
-            plan.addPoint(point4);
-    
-            Point point5 = new Point(653,452);
-            plan.addPoint(point5);
-    
-            Point point6 = new Point(231,321);
-            plan.addPoint(point6);
-            Kmeans km = new Kmeans(plan,3);
-            km.setupK_means();
-            
-            
             System.out.println("Etape actuel : " + act_save + "\nNombre d'étape max : " + nb_save + " \n ------------ \nEtape précédente : 0\nEtape suivante : 1");
             int userAns = scan.nextInt();
 
             if(userAns == 1){
                 background(255);
                 
-                if(act_save == nb_save){
+                if(act_save == nb_save){ //Si il il n'y a pas d'image sauvegardé pour l'étape suivante
                     drawKmeans(plan,km);
                     save("StockDessin\\dessin" + act_save + ".jpg");
                     act_save += 1;
@@ -95,9 +85,13 @@ public class Dessin extends PApplet{
         catch(NegativeValue e){
             e.printStackTrace();
         }
+        
 
     }
 
+    /**
+     * Charge et dessine une image selon la sauvegarde actuel
+     */
     public void loadAndDrawImage(){
         background(255);
         PImage img = loadImage("StockDessin\\dessin" + act_save + ".jpg");

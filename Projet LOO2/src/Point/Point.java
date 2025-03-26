@@ -1,5 +1,6 @@
 package Point;
 
+
 import exceptions.NegativeValue;
 
 /**
@@ -87,6 +88,11 @@ public class Point {
             }
         }
         return min;
+    }
+
+    public void setRandom(int maxX, int maxY){
+        x = (int)(Math.random() * maxX);
+        y = (int)(Math.random() * maxY);
     }
 
     @Override
