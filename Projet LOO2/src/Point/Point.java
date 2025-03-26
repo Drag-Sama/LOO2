@@ -22,8 +22,9 @@ public class Point {
 
 
     /**
-     * Modifie le
-     * @param newX
+     * Modifie la coordonnée X du Point
+     * @param newX la nouvelle coordonnée X
+     * @throws NegativeValue
      */
     public void setX(float newX) throws NegativeValue {
         if (newX >= 0) {
@@ -34,14 +35,32 @@ public class Point {
         }
     }
 
+    /**
+     * Renvoie la coordonnée X du point
+     * @return la coordonnée X du point (float)
+     */
     public float getX(){
         return x;
     }
 
-    public void setY(float newY){
-        this.y = newY;
+    /**
+     * Modifie la coordonnée Y du Point
+     * @param newY la nouvelle coordonnée Y
+     * @throws NegativeValue
+     */
+    public void setY(float newY) throws NegativeValue {
+        if (newY >= 0) {
+            this.y = newY;
+        }
+        else {
+            throw new NegativeValue();
+        }
     }
 
+    /**
+     * Renvoie la coordonnée Y du Point
+     * @return la coordonnée Y du Point (float)
+     */
     public float getY(){
         return y;
     }
@@ -76,7 +95,7 @@ public class Point {
         return s;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NegativeValue {
         Point[] lp = new Point[1];
         Point p = new Point(0, 0);
         p.setX(2);
