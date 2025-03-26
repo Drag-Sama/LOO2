@@ -7,7 +7,7 @@ import exceptions.NegativeValue;
  * @param rayon le rayon du cercle
  * @param nvCentre le centre du cercle
  */
-public class Cercle extends Formes {
+public class Cercle extends Forme {
     private float rayon;
 
     public Cercle(float rayon, Point nvCentre) throws NegativeValue{

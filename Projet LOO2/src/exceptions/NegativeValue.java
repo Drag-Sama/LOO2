@@ -1,10 +1,8 @@
 package exceptions;
 
 
-public class NegativeValue extends Exception{
+public class NegativeValue extends RuntimeException{
     public NegativeValue(){
-        System.err.println("Probleme: valeur négative non autorisé");
+        super("Probleme: valeur négative non autorisé");
     }
-
-
 }

@@ -8,7 +8,7 @@ import exceptions.NegativeValue;
  * @param longueur Grand demi axe de l'ellipse
  * @param largeur Petit demi axe de l'ellipse
  */
-public class Ellipse extends Formes {
+public class Ellipse extends Forme {
     private float longueur; // = "grand" demi-axe
     private float largeur; // = "petit" demi-axe
 

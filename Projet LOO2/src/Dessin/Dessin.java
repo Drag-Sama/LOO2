@@ -4,13 +4,12 @@ import processing.core.PApplet;
 import Formes.Polygone;
 import Formes.Cercle;
 import Formes.Ellipse;
-import Formes.Formes;
+import Formes.Forme;
 import Plan.Kmeans;
 import Plan.Plan;
 import Point.Point;
 import exceptions.NegativeValue;
 
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Dessin extends PApplet{
@@ -104,7 +103,7 @@ public class Dessin extends PApplet{
      * Permet de dessiner une forme selon sa nature
      * @param actForme la forme que l'on souhaite dessiner
      */
-    public void drawForme(Formes actForme) throws NegativeValue{
+    public void drawForme(Forme actForme) throws NegativeValue{
         strokeWeight(2);
         stroke(actForme.getR(), actForme.getG(), actForme.getB());
         noFill();

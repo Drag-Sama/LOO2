@@ -8,7 +8,7 @@ import Point.Point;
  * @param centre Le centre de la forme
  * @param r,g,b La couleur de la forme
  */
-public abstract class Formes{
+public abstract class Forme {
     /**
      * Centre de la forme de type Point
      */

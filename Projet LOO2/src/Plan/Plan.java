@@ -2,11 +2,11 @@ package Plan;
 
 import java.util.LinkedHashSet;
 
-import Formes.Formes;
+import Formes.Forme;
 import Point.Point;
 
 public class Plan {
-    private LinkedHashSet<Formes> formes = new LinkedHashSet<Formes>();
+    private LinkedHashSet<Forme> formes = new LinkedHashSet<Forme>();
     private int nbFormes;
     private LinkedHashSet<Point> points = new LinkedHashSet<Point>();
     private int nbPoints;
@@ -18,7 +18,7 @@ public class Plan {
 
     ///////// ACCESSEURS /////////////
 
-    public LinkedHashSet<Formes> getFormes() {
+    public LinkedHashSet<Forme> getFormes() {
         return formes;
     }
 
@@ -34,7 +34,7 @@ public class Plan {
         return nbPoints;
     }
 
-    public void setFormes(LinkedHashSet<Formes> formes) {
+    public void setFormes(LinkedHashSet<Forme> formes) {
         this.formes = formes;
     }
 
@@ -57,7 +57,7 @@ public class Plan {
      * Ajoute une forme à la liste des formes du plan et actualise nbFormes
      * @param forme à ajouter
      */
-    public void addForme(Formes forme) {
+    public void addForme(Forme forme) {
         this.formes.add(forme);
         this.setNbFormes(this.getNbFormes()+1);
     }
@@ -68,7 +68,7 @@ public class Plan {
      * @return true si elle a pu être retirée, false sinon.
      */
 
-    public boolean removeForme(Formes forme) {
+    public boolean removeForme(Forme forme) {
         if (this.formes.remove(forme)) {
             this.setNbFormes(this.getNbFormes()-1);
             return true;

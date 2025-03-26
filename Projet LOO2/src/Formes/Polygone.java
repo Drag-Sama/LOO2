@@ -11,7 +11,7 @@ import exceptions.NegativeValue;
  * @param nbPoints Nombre de points du polygone
  * @param points Liste des points du polygone
  */
-public class Polygone extends Formes{
+public class Polygone extends Forme {
     private int nbPoints = 0;
     private Point[] points = new Point[50];
 
