@@ -71,6 +71,15 @@ public class Kmeans {
     }
 
     /**
+     * Permet de changer le plan de Kmeans
+     * @param nvPlan Le nouveau plan
+     */
+    public void setPlan(Plan nvPlan){
+        this.plan = nvPlan;
+        this.indicesCentres = new int[this.plan.getNbPoints()];
+    }
+
+    /**
      * Renvoie la liste des indices des centres indicesCentres.
      * @return la liste des indices des centres indicesCentres (liste d'entiers / int[])
      */
@@ -173,6 +182,7 @@ public class Kmeans {
         boolean centresModif = false;
         Point[] arrayPoints;
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
+        System.out.println("Nb Points : " + plan.getNbPoints());
         Collections.shuffle(Arrays.asList(arrayPoints)); // mélange la liste arrayPoints
         for (int i = 0; i < this.plan.getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
             indicesCentres[i] = arrayPoints[i].getMinDistPoint(centres); // on attribue le centre d'indice min au point i
