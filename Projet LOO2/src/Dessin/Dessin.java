@@ -1,6 +1,6 @@
 package Dessin;
 import processing.core.PApplet;
-
+import processing.core.PImage;
 import Formes.Polygone;
 import Formes.Cercle;
 import Formes.Ellipse;
@@ -10,7 +10,6 @@ import Plan.Plan;
 import Point.Point;
 import exceptions.NegativeValue;
 
-import java.util.Optional;
 import java.util.Scanner;
 
 /**
@@ -20,6 +19,8 @@ import java.util.Scanner;
 public class Dessin extends PApplet{
     
     Plan plan;
+    int act_save = 0; // indice de la sauvegarde actuelle.
+    int nb_save = 0; //Nombre d'image sauvegardé et donc d'étape effectué 
 
     /**
      * Permet de changer les paramètres de base du dessin
@@ -35,10 +36,11 @@ public class Dessin extends PApplet{
 
     public void draw() {
         Scanner scan = new Scanner(System.in);
-        int act_save = 0; // indice de la sauvegarde actuelle.
+        
         Plan plan = new Plan();
         background(255);
         try{
+            
             Point point = new Point(50, 150);
             plan.addPoint(point);
     
@@ -57,20 +59,49 @@ public class Dessin extends PApplet{
             Point point6 = new Point(231,321);
             plan.addPoint(point6);
             Kmeans km = new Kmeans(plan,3);
-            km.k_means();
-            //drawKmeans(plan,km);
-    
-            Cercle e = new Cercle(100, point6);
-            plan.addForme(e);
-            drawForme(e);
+            
+            
+            System.out.println("Etape précédante : 0\nEtape suivante : 1");
+            int userAns = scan.nextInt();
+
+            if(userAns == 1){
+                background(0);
+                if(act_save <= nb_save){
+                    drawKmeans(plan,km);
+                    save("dessin" + act_save);
+                    act_save += 1;
+                    }
+                else{
+                    loadAndDrawImage();
+                    act_save += 1;
+                }
+            }
+            else{
+                if(act_save > 0){
+                    loadAndDrawImage();
+                    act_save -= 1;
+                }
+                else{
+                    System.out.println("Erreur, il n'y a pas d'étape précédante");
+                }
+                
+            }
+            
+            
+            scan.close();
+            
         }
         catch(NegativeValue e){
             e.printStackTrace();
         }
-        
 
-        scan.nextLine();
-        scan.close();
+    }
+
+    public void loadAndDrawImage(){
+        background(0);
+        PImage img = loadImage("dessin" + act_save);
+        image(img, 0, 0);
+        nb_save += 1;
     }
 
 
@@ -81,32 +112,45 @@ public class Dessin extends PApplet{
      * @param km (Kmeans)
      * pas de return
      */
+    public void drawKmeans(Plan plan,Kmeans km) throws NegativeValue{
+        background(0);
+        km.k_meansOneStep();
+        //Dessine le centre des clusters
+        strokeWeight(5);
+        stroke(0,0,0);
+        drawPoint(km.getCentres(),km.getNbClusters());
 
-    public void drawKmeans(Plan plan,Kmeans km) {
-
-        System.out.println("Centres : ");
-        for(int i = 0; i < km.getNbClusters();i++){
-            stroke(0,0,0);
-            System.out.println(i + ": " + km.getCentres()[i].getX() + " " + km.getCentres()[i].getY()); // afficher les coordonnées du centre
-
-
-            strokeWeight(4);
-            point(km.getCentres()[i].getX(), km.getCentres()[i].getY()); // dessine ce centre
-        }
+        //Dessine les points du plan
         Point[] arrayPoints;
         arrayPoints = plan.getPoints().toArray(new Point[plan.getNbPoints()]);
-        System.out.println("Points : ");
-        for(int i = 0; i < plan.getNbPoints();i++){
-            System.out.println(i + ": " + arrayPoints[i].getX() + " " + arrayPoints[i].getY());strokeWeight(4);
-            strokeWeight(3);
-            stroke(255,0,0);
-            point(arrayPoints[i].getX(),arrayPoints[i].getY());
-        }
-
+        stroke(255,0,0);
+        strokeWeight(3);
+        drawPoint(arrayPoints, plan.getNbPoints());
         
     }
 
-    //draw Point ici
+    /**
+     * Dessine les points de la liste passée en paramètre
+     * @param lPoints Liste de points à dessiner
+     * @param nbPoints Nombre de points à dessiner
+     */
+    public void drawPoint(Point[] lPoints, int nbPoints){
+        for(int i = 0; i < nbPoints; i ++){ //Boucle for qui parcours les points de la liste passée en paramètre
+            point(lPoints[i].getX(),lPoints[i].getY());
+        }
+    }
+
+    /**
+     * Dessine les formes de la liste passée en paramètre
+     * @param lFormes Liste de formes à dessiner
+     * @param nbFormes Nombre de formes à dessiner
+     * @throws NegativeValue
+     */
+    public void drawAllFormes(Formes[] lFormes, int nbFormes)throws NegativeValue{
+        for(int i = 0; i < nbFormes; i++){ //Boucle for qui parcours les formes de la liste passée en paramètre
+            drawForme(lFormes[i]);
+        }
+    }
 
     /**
      * Permet de dessiner une forme selon sa nature
