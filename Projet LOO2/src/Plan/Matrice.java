@@ -19,10 +19,18 @@ public class Matrice {
 
     //Getter Setter
 
+    /**
+     * Renvoie la dimension X de la matrice
+     * @return Dimension X
+     */
     public int getDimX() {
         return dimX;
     }
 
+    /**
+     * Renvoie la dimension Y de la matrice
+     * @return Dimension Y
+     */
     public int getDimY() {
         return dimY;
     }

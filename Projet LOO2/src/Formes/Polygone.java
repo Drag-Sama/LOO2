@@ -22,20 +22,43 @@ public class Polygone extends Forme {
     }
     
 
+    /**
+     * Renvoie les points du polygone
+     * @return
+     */
     public Point[] getPoints() {
         return points;
     }
 
+    /**
+     * Permet de changer les points du polygone
+     * @param points Nouveau points
+     */
     public void setPoints(Point[] points) {
         this.points = points;
     }
 
+    /**
+     * Renvoie le nombre de point(s) du polygone
+     * @return
+     */
     public int getNbPoints() {
         return nbPoints;
     }
 
-    public void setNbPoints(int nbPoints) {
-        this.nbPoints = nbPoints;
+    /**
+     * Permet de changer le nombre de points 
+     * @param nvNbPoints Le nouveau nombre de points
+     * @throws NegativeValue Les valeurs négatives ne sont pas accepté en paramètre
+     */
+    public void setNbPoints(int nvNbPoints) throws NegativeValue{
+        if(nvNbPoints >= 0){
+            this.nbPoints = nvNbPoints;
+        }
+        else{
+            throw new NegativeValue();
+        }
+       
     }
 
     /** Ajoute un point à la liste de points
