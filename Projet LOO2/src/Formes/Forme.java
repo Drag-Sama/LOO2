@@ -14,13 +14,14 @@ public abstract class Forme {
      */
     private Point centre;
     /**
-     *  Couleur de la forme composée de 3 int :  r g b
+     * Couleur de la forme composée de 3 int :  r g b
      */
-    int r = 0,g = 0,b = 0;
+    int r = 0, g = 0, b = 0;
 
 
     /**
      * Renvoie le centre de la forme
+     *
      * @return Centre de la forme
      */
     public Point getCentre() {
@@ -29,6 +30,7 @@ public abstract class Forme {
 
     /**
      * Change le centre de la forme
+     *
      * @param centre le nouveau centre
      */
     public void setCentre(Point centre) {
@@ -37,35 +39,39 @@ public abstract class Forme {
 
     /**
      * Renvoie le r de la couleur de la forme
+     *
      * @return R
      */
-    public int getR(){
+    public int getR() {
         return r;
     }
 
     /**
      * Renvoie le g de la couleur de la forme
+     *
      * @return G
      */
-    public int getG(){
+    public int getG() {
         return g;
     }
-    
+
     /**
      * Renvoie le b de la couleur de la forme
+     *
      * @return B
      */
-    public int getB(){
+    public int getB() {
         return b;
     }
 
     /**
      * Permet de change la couleur de la forme avec les 3 paramètres (R,G,B)
+     *
      * @param nvR R
      * @param nvG G
      * @param nvB B
      */
-    public void setRGB(int nvR, int nvG, int nvB){
+    public void setRGB(int nvR, int nvG, int nvB) {
         r = nvR;
         g = nvG;
         b = nvB;
@@ -73,6 +79,7 @@ public abstract class Forme {
 
     /**
      * Renvoie un chiffre aléatoire entre 0 et 255
+     *
      * @return
      */
     public int getRandomNumber() {
@@ -82,11 +89,8 @@ public abstract class Forme {
     /**
      * Permet de changer la couleur de la forme aléatoirement
      */
-    public void setRandomRGB(){
+    public void setRandomRGB() {
         setRGB(getRandomNumber(), getRandomNumber(), getRandomNumber());
     }
 
-
 }
-
-

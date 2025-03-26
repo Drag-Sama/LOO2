@@ -18,13 +18,12 @@ public class Polygone extends Forme {
     public Polygone(Point centre){
         this.setCentre(centre);
         this.setRandomRGB();
-        System.out.println("yay");
     }
     
 
     /**
      * Renvoie les points du polygone
-     * @return
+     * @return la liste des points
      */
     public Point[] getPoints() {
         return points;

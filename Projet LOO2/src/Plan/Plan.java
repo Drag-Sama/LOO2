@@ -156,12 +156,39 @@ public class Plan {
 
     @Override
     public String toString() {
-        String str = "Plan : \n \t";
+        String str = "Plan : \n  ";
+        for (Forme forme : getFormes()) {
+            str = "\t" + forme.toString();
+        }
+        str += " ---------------- \n Points : \n";
+        for (Point point : getPoints()) {
+            str = "\t" + point.toString();
+        }
         return str;
     }
 
 
     public static void main(String[] args) {
+        Plan plan = new Plan();
+        Point point = new Point(50, 150);
+        plan.addPoint(point);
+
+        Point point2 = new Point(60, 80);
+        plan.addPoint(point2);
+
+        Point point3 = new Point(450, 300);
+        plan.addPoint(point3);
+
+        Point point4 = new Point(500, 250);
+        plan.addPoint(point4);
+
+        Point point5 = new Point(653,452);
+        plan.addPoint(point5);
+
+        Point point6 = new Point(231,321);
+        plan.addPoint(point6);
+
+        System.out.println(plan);
 
     }
 }
