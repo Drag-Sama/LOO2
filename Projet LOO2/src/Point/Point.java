@@ -1,7 +1,6 @@
 package Point;
 
 import exceptions.NegativeValue;
-import exceptions.NegativeValue;
 
 /**
  * @param x Position x du point
@@ -16,9 +15,41 @@ public class Point {
      * @param newX la coordonnée X
      * @param newY la coordonnée Y
      */
-    public Point (float newX, float newY) throws NegativeValue{
-        if (newX >= 0 && newY >= 0) {
+    public Point (float newX, float newY) throws NegativeValue {
+        setX(newX);
+        setY(newY);
+    }
+
+
+    /**
+     * Modifie la coordonnée X du Point
+     * @param newX la nouvelle coordonnée X
+     * @throws NegativeValue
+     */
+    public void setX(float newX) throws NegativeValue {
+        if (newX >= 0) {
             this.x = newX;
+        }
+        else {
+            throw new NegativeValue();
+        }
+    }
+
+    /**
+     * Renvoie la coordonnée X du point
+     * @return la coordonnée X du point (float)
+     */
+    public float getX(){
+        return x;
+    }
+
+    /**
+     * Modifie la coordonnée Y du Point
+     * @param newY la nouvelle coordonnée Y
+     * @throws NegativeValue
+     */
+    public void setY(float newY) throws NegativeValue {
+        if (newY >= 0) {
             this.y = newY;
         }
         else {
@@ -26,24 +57,10 @@ public class Point {
         }
     }
 
-
     /**
-     * Modifie le
-     * @param newX
+     * Renvoie la coordonnée Y du Point
+     * @return la coordonnée Y du Point (float)
      */
-    public void setX(int newX) throws NegativeValue {
-        
-        this.x = newX;
-    }
-
-    public float getX(){
-        return x;
-    }
-
-    public void setY(int newY){
-        this.y = newY;
-    }
-
     public float getY(){
         return y;
     }
