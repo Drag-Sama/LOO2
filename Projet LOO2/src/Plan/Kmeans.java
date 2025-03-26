@@ -156,6 +156,15 @@ public class Kmeans {
     }
 
     /**
+     * Mise en place pour le k_means classique
+     */
+    public void setupK_means() {
+        Point[] arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
+        Collections.shuffle(Arrays.asList(arrayPoints));
+        for (int i = 0; i < this.getNbClusters(); i++) centres[i] = arrayPoints[i];
+    }
+
+    /**
      * Réalise UNE itération de l'algo kmeans → fonction pour dessiner étape par étape
      * @return true si l'un des centres a été modifié, false sinon.
      * @throws ArithmeticException → division par zéro dans le cas où lors du calcul des nouveaux centres, l'un d'eux n'est pas retrouvé dans la liste d'indices.

@@ -5,6 +5,13 @@ import java.util.LinkedHashSet;
 import Formes.Forme;
 import Point.Point;
 
+/**
+ * Classe représentant un plan en 2D avec longueur * largeur infinie / non définie.
+ * @param formes la liste (Hashset) des formes dans le plan
+ * @param nbFormes le nombre de formes dans le plan
+ * @param points la liste (Hashset) des points dans le plan
+ * @param nbPoints le nombre de points dans le plan
+ */
 public class Plan {
     private LinkedHashSet<Forme> formes = new LinkedHashSet<Forme>();
     private int nbFormes;
