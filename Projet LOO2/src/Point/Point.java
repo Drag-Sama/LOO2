@@ -1,6 +1,7 @@
 package Point;
 
-import exceptions.NegativeValueEllipse;
+import exceptions.NegativeValue;
+import exceptions.NegativeValue;
 
 /**
  * @param x Position x du point
@@ -15,7 +16,7 @@ public class Point {
      * @param newX la coordonnée X
      * @param newY la coordonnée Y
      */
-    public Point (float newX, float newY){
+    public Point (float newX, float newY) throws NegativeValue{
         if (newX >= 0 && newY >= 0) {
             this.x = newX;
             this.y = newY;
@@ -30,8 +31,8 @@ public class Point {
      * Modifie le
      * @param newX
      */
-    public void setX(int newX) throws NegativeValueEllipse {
-        if ()
+    public void setX(int newX) throws NegativeValue {
+        
         this.x = newX;
     }
 
@@ -77,7 +78,7 @@ public class Point {
         return s;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NegativeValue {
         Point[] lp = new Point[1];
         Point p = new Point(0, 0);
         p.setX(2);

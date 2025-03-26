@@ -8,6 +8,7 @@ import Formes.Formes;
 import Plan.Kmeans;
 import Plan.Plan;
 import Point.Point;
+import exceptions.NegativeValue;
 
 import java.util.Optional;
 import java.util.Scanner;
@@ -24,7 +25,7 @@ public class Dessin extends PApplet{
         background(255);
     }
 
-    public void draw(){
+    public void draw() {
         Scanner scan = new Scanner(System.in);
         int act_save = 0; // indice de la sauvegarde actuelle.
         Plan plan = new Plan();
@@ -97,7 +98,7 @@ public class Dessin extends PApplet{
      * Permet de dessiner une forme selon sa nature
      * @param actForme la forme que l'on souhaite dessiner
      */
-    public void drawForme(Formes actForme){
+    public void drawForme(Formes actForme) throws NegativeValue{
         strokeWeight(2);
         stroke(actForme.getR(), actForme.getG(), actForme.getB());
         noFill();
