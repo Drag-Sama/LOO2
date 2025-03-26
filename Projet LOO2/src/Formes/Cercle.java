@@ -10,18 +10,33 @@ import exceptions.NegativeValue;
 public class Cercle extends Formes {
     private float rayon;
 
-    public Cercle(float rayon, Point nvCentre){
+    public Cercle(float rayon, Point nvCentre) throws NegativeValue{
         setCentre(nvCentre);
         setRayon(rayon);
         this.setRandomRGB();
     }
 
+    /**
+     * Renvoie le rayon du cercle
+     * @return Le rayon
+     */
     public float getRayon() {
         return rayon;
     }
 
-    public void setRayon(float rayon) {
-        this.rayon = rayon;
+    /**
+     * Permet de changer le rayon du cercle
+     * @param rayon Le nouveau rayon
+     * @throws Negativevalue Les valeurs négatives ne sont pas accepté en paramètre
+     */
+    public void setRayon(float nvRayon) throws NegativeValue{
+        if(nvRayon >= 0){
+            this.rayon = nvRayon;
+        }
+        else{
+            throw new NegativeValue();
+        }
+        
     }
 
     @Override

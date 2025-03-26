@@ -37,34 +37,51 @@ public abstract class Formes{
 
     /**
      * Renvoie le r de la couleur de la forme
-     * @return
+     * @return R
      */
     public int getR(){
         return r;
     }
 
     /**
-     * Renvoie le g de la vouleur 
-     * @return
+     * Renvoie le g de la couleur de la forme
+     * @return G
      */
     public int getG(){
         return g;
     }
-
+    
+    /**
+     * Renvoie le b de la couleur de la forme
+     * @return B
+     */
     public int getB(){
         return b;
     }
 
+    /**
+     * Permet de change la couleur de la forme avec les 3 paramètres (R,G,B)
+     * @param nvR R
+     * @param nvG G
+     * @param nvB B
+     */
     public void setRGB(int nvR, int nvG, int nvB){
         r = nvR;
         g = nvG;
         b = nvB;
     }
 
+    /**
+     * Renvoie un chiffre aléatoire entre 0 et 255
+     * @return
+     */
     public int getRandomNumber() {
         return (int) ((Math.random() * (255)));
     }
 
+    /**
+     * Permet de changer la couleur de la forme aléatoirement
+     */
     public void setRandomRGB(){
         setRGB(getRandomNumber(), getRandomNumber(), getRandomNumber());
     }

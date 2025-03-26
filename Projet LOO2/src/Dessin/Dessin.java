@@ -30,30 +30,36 @@ public class Dessin extends PApplet{
         int act_save = 0; // indice de la sauvegarde actuelle.
         Plan plan = new Plan();
         background(255);
-        Point point = new Point(50, 150);
-        plan.addPoint(point);
-
-        Point point2 = new Point(60, 80);
-        plan.addPoint(point2);
-
-        Point point3 = new Point(450, 300);
-        plan.addPoint(point3);
-
-        Point point4 = new Point(500, 250);
-        plan.addPoint(point4);
-
-        Point point5 = new Point(653,452);
-        plan.addPoint(point5);
-
-        Point point6 = new Point(231,321);
-        plan.addPoint(point6);
-        Kmeans km = new Kmeans(plan,3);
-        km.k_means();
-        //drawKmeans(plan,km);
-
-        Cercle e = new Cercle(100, point6);
-        plan.addForme(e);
-        drawForme(e);
+        try{
+            Point point = new Point(50, 150);
+            plan.addPoint(point);
+    
+            Point point2 = new Point(60, 80);
+            plan.addPoint(point2);
+    
+            Point point3 = new Point(450, 300);
+            plan.addPoint(point3);
+    
+            Point point4 = new Point(500, 250);
+            plan.addPoint(point4);
+    
+            Point point5 = new Point(653,452);
+            plan.addPoint(point5);
+    
+            Point point6 = new Point(231,321);
+            plan.addPoint(point6);
+            Kmeans km = new Kmeans(plan,3);
+            km.k_means();
+            //drawKmeans(plan,km);
+    
+            Cercle e = new Cercle(100, point6);
+            plan.addForme(e);
+            drawForme(e);
+        }
+        catch(NegativeValue e){
+            e.printStackTrace();
+        }
+        
 
         scan.nextLine();
         scan.close();

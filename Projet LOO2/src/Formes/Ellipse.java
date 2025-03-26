@@ -39,10 +39,11 @@ public class Ellipse extends Formes {
     /**
      * Permet de changer le petit demi axe de l'ellipse (la largeur)
      * @param largeur La nouvelle valeur du petit demi axe
+     * @throws Negativevalue Les valeurs négatives ne sont pas accepté en paramètre
      */
-    public void setLargeur(float largeur) throws NegativeValue {
+    public void setLargeur(float nvLargeur) throws NegativeValue {
         if(largeur >= 0){
-            this.largeur = largeur;
+            this.largeur = nvLargeur;
         }
         else{
             throw new NegativeValue();
@@ -53,9 +54,15 @@ public class Ellipse extends Formes {
     /**
      * Permet de changer le grand demi axe de l'ellipse (la longueur)
      * @param longueur La nouvelle valeur du grand demi axe
+     * @throws Negativevalue Les valeurs négatives ne sont pas accepté en paramètre
      */
-    public void setLongueur(float longueur) {
-        this.longueur = longueur;
+    public void setLongueur(float nvLongueur) throws NegativeValue {
+        if(longueur >= 0){
+            this.longueur = nvLongueur;
+        }
+        else{
+            throw new NegativeValue();
+        }
     }
 
     
