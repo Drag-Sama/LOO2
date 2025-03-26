@@ -41,7 +41,7 @@ public class Cercle extends Forme {
 
     @Override
     public String toString() {
-        return  this.getClass().getSimpleName() +  " Centre : " + this.getCentre().toString() + " Rayon : " + rayon;
+        return  this.getClass().getSimpleName() +  " : \n \t Centre : " + this.getCentre().toString() + " \n \t Rayon : " + rayon;
     }
 
     public static void main(String[] args) throws NegativeValue{

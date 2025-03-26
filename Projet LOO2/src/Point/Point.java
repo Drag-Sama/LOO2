@@ -97,7 +97,7 @@ public class Point {
 
     @Override
     public String toString() {
-        String s = this.getClass().getSimpleName() + " : \n \t X = " + this.getX() + "\t Y = " + this.getY() + "\n";
+        String s = "X = " + this.getX() + "\t Y = " + this.getY();
         return s;
     }
 
