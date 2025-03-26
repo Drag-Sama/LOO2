@@ -140,7 +140,6 @@ public class Kmeans {
                 float nv_x = 0;
                 float nv_y = 0;
                 int nb = 0;
-                System.out.println("Tableau indices centres : ");
                 for (int j = 0; j < this.plan.getNbPoints(); j++) { // pour chaque points, on vérifie si son centre est d'indice i
                     System.out.println(" -  " + indicesCentres[j]);
                     if (indicesCentres[j] == i) {
