@@ -43,6 +43,10 @@ public abstract class Formes{
         return r;
     }
 
+    /**
+     * Renvoie le g de la vouleur 
+     * @return
+     */
     public int getG(){
         return g;
     }
