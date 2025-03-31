@@ -14,8 +14,6 @@ public class Kmeans {
     private int nbClusters;
     private Centre[] centres;
     private Plan plan;
-    private int[] indicesCentres; // liste d'entiers représentant l'indice (dans la liste) des
-                                  // centres attribuées aux points;
 
     /**
      * Crée une classe Kmeans avec un Plan et son nombre de clusters
@@ -136,7 +134,7 @@ public class Kmeans {
     public void setupK_means() {
         Point[] arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         Collections.shuffle(Arrays.asList(arrayPoints));
-        for (int i = 0; i < this.getNbClusters(); i++) centres[i] = (Centre)arrayPoints[i];
+        for (int i = 0; i < this.getNbClusters(); i++) centres[i].copyPoints(arrayPoints[i]);
     }
 
     /**
@@ -213,11 +211,9 @@ public class Kmeans {
             float moyenneY = 0;
             int nbPoints = 0;
             for (Point p : centres[indCluster].getPoints()) { // pour chaque point du plan
-                if (getIndicesCentres()[indPoint] == indCluster) { // si le point appartient au cluster
-                    moyenneX += points[indPoint].getX(); // on ajoute son X et Y à leurs moyennes respectives
-                    moyenneY += points[indPoint].getY();
-                    nbPoints++;
-                }
+                moyenneX += p.getX(); // on ajoute son X et Y à leurs moyennes respectives
+                moyenneY += p.getY();
+                nbPoints++;
             }
             moyenneX /= nbPoints;
             moyenneX /= nbPoints;
