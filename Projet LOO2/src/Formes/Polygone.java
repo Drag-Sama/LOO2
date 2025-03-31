@@ -82,6 +82,7 @@ public class Polygone extends Forme {
             }
         }
         points = Arrays.copyOf(points, j);
+        nbPoints--;
     }
 
     /**
@@ -104,8 +105,7 @@ public class Polygone extends Forme {
             angle[i] = Math.tan((moyY - points[i].getY()) / (moyX - points[i].getX()));
         }
 
-        //On tri les points selon leur angle pour les mettres dans l'ordre
-        Point[] ancPoints = points;
+        //On trie les points selon leur angle pour les mettre dans l'ordre
         HashSet<Integer> pointUsed = new HashSet<Integer>();
         int nbPointUsed = 0;
         while(nbPointUsed != nbPoints){
@@ -119,7 +119,7 @@ public class Polygone extends Forme {
             }
             pointUsed.add(j);
             nbPointUsed += 1;
-            points[nbPointUsed] = ancPoints[j];
+            points[nbPointUsed] = points[j];
         }
         
     }
@@ -128,22 +128,21 @@ public class Polygone extends Forme {
     public String toString() {
         String s = this.getClass().getSimpleName() + " : \n";
         for (int i = 0; i < this.getNbPoints(); i++) {
-            s+= "\t -  " + this.getClass().getSimpleName();
+            s += "\t -  " + this.points[i].toString();
         }
         return s;
     }
 
     public static void main(String[] args) throws NegativeValue {
-        Point[] testPoints =new Point[50];
         Point centre = new Point(0, 0);
         Polygone a = new Polygone(centre);
-        testPoints = a.getPoints();
-        a.setPoints(testPoints);
-        int testNbPoints = a.getNbPoints();
-        a.setNbPoints(testNbPoints);
         Point point = new Point(1,2);
         a.addPoint(point);
-        a.removePoint(point);
+        a.addPoint(new Point(0,0));
+        a.addPoint(new Point(5,9));
+        a.addPoint(new Point(8,4));
+        System.out.println(a);
+        a.triPoints();
         System.out.println(a);
     }
 }
