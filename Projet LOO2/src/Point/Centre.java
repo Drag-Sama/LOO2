@@ -22,12 +22,21 @@ public class Centre extends Point {
         super(newX, newY);
     }
 
+    /**
+     * Ajoute un point au centre
+     * @param p Le point qu'on ajoute
+     */
     public void addPoint(Point p) {
         copyPoints(points, nbPoints + 1);
         points[nbPoints] = p;
         nbPoints += 1;
     }
 
+    /**
+     * Copie une liste sur celle ci
+     * @param lpt La liste qu'on copie
+     * @param nvSize La nouvelle taille de la liste
+     */
     public void copyPoints(Point[] lpt, int nvSize){
         System.out.println(lpt.length);
         points = new Point[nvSize];
@@ -36,18 +45,27 @@ public class Centre extends Point {
         }
     }
 
+    /**
+     * Permet de changer le nombre de points 
+     * @param v Nouveau nombre de points
+     */
     public void setNbPoints(int v) {
         nbPoints = v;
     }
 
+    /**
+     * Renvoie le nombre de point du centre
+     * @return Le nombre de point du centre
+     */
     public int getNbPoints() {
         return nbPoints;
     }
 
-    public void setPoints(Point[] points) {
-        this.points = points;
-    }
-
+    
+    /**
+     * Renvoie les points du centre
+     * @return La liste de points du centre
+     */
     public Point[] getPoints() {
         return points;
     }
