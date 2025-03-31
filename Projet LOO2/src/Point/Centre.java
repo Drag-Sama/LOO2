@@ -27,7 +27,7 @@ public class Centre extends Point {
      * @param p Le point qu'on ajoute
      */
     public void addPoint(Point p) {
-        copyPoints(points, nbPoints + 1);
+        copyListePoints(points, nbPoints + 1);
         points[nbPoints] = p;
         nbPoints += 1;
     }
@@ -37,12 +37,22 @@ public class Centre extends Point {
      * @param lpt La liste qu'on copie
      * @param nvSize La nouvelle taille de la liste
      */
-    public void copyPoints(Point[] lpt, int nvSize){
+    public void copyListePoints(Point[] lpt, int nvSize){
         System.out.println(lpt.length);
         points = new Point[nvSize];
         for(int i = 0; i < lpt.length; i++){
             points[i] = lpt[i];
         }
+    }
+
+    /**
+     * Remplace les valeurs de ce point par celle du point en paramètre
+     * @param p
+     */
+    public void copyPoint(Point p){
+        x = p.getX();
+        y = p.getY();
+        setRGB(p.getR(), p.getG(), p.getB());
     }
 
     /**

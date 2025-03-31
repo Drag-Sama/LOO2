@@ -114,6 +114,7 @@ public class Dessin extends PApplet{
         for(int i = 0; i < km.getNbClusters(); i++){ //On ajoute les cercles pour chaque cluster
             Point pt =  km.maxDistCluster(i);
             Cercle cercle = new Cercle(km.getCentres()[i].getDist(pt), km.getCentres()[i]);
+            cercle.setRGB(km.getCentres()[i].getR(), km.getCentres()[i].getG(), km.getCentres()[i].getB());
             plan.addForme(cercle);
         }
         drawAllForme((plan.getFormes()), plan.getNbFormes());
