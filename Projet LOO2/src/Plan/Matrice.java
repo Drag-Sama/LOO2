@@ -125,9 +125,13 @@ public class Matrice {
     public static void main(String[] args) {
         Matrice m = new Matrice(2, 2);
         m.getTransposee();
-        m.setValeur(0, 0, 1);
+        m.setValeur(0, 0, 2);
+        m.setValeur(1, 1, 1);
+        m.setValeur(1, 0, 1);
+        m.setValeur(0, 1, 2);
         m.getValeur(0, 0);
         System.out.println(m);
-        m.multiplicationMatrice(m);
+        Matrice res =  m.multiplicationMatrice(m);
+        System.out.println(res);
     }
 }
