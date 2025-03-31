@@ -105,6 +105,7 @@ public class Polygone extends Forme {
         }
 
         //On tri les points selon leur angle pour les mettres dans l'ordre
+        Point[] ancPoints = points;
         HashSet<Integer> pointUsed = new HashSet<Integer>();
         int nbPointUsed = 0;
         while(nbPointUsed != nbPoints){
@@ -118,7 +119,7 @@ public class Polygone extends Forme {
             }
             pointUsed.add(j);
             nbPointUsed += 1;
-            points[nbPointUsed] = points[j];
+            points[nbPointUsed] = ancPoints[j];
         }
         
     }
