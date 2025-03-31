@@ -81,7 +81,7 @@ public class Centre extends Point {
     }
     @Override
     public String toString() {
-        String s =  "X = " + this.getX() + "\t Y = " + this.getY() + "\n Liste points : ";
+        String s =  "X = " + this.getX() + "\t Y = " + this.getY() + "\n Liste points (" +nbPoints + ") : " ;
         for(int i = 0; i < nbPoints; i++){
             s += points[i] + "\n";
         }
