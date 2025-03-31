@@ -107,10 +107,19 @@ public class Dessin extends PApplet{
      * pas de return
      */
     public void drawKmeans(Plan plan,Kmeans km) throws NegativeValue{
-        background(255);
         km.k_meansOneStep();
+        background(255);
+
+        plan.resetForme();
+        for(int i = 0; i < km.getNbClusters(); i++){ //On ajoute les cercles pour chaque cluster
+            Point pt =  km.maxDistCluster(i);
+            Cercle cercle = new Cercle(km.getCentres()[i].getDist(pt), km.getCentres()[i]);
+            plan.addForme(cercle);
+        }
+        drawAllForme((plan.getFormes()), plan.getNbFormes());
+
         //Dessine le centre des clusters
-        strokeWeight(5);
+        strokeWeight(7);
         stroke(0,0,0);
         drawPoint(km.getCentres(),km.getNbClusters());
 
@@ -118,8 +127,10 @@ public class Dessin extends PApplet{
         Point[] arrayPoints;
         arrayPoints = plan.getPoints().toArray(new Point[plan.getNbPoints()]);
         stroke(255,0,0);
-        strokeWeight(3);
+        strokeWeight(5);
         drawPoint(arrayPoints, plan.getNbPoints());
+
+        
         
     }
 
