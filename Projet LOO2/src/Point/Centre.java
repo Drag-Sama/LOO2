@@ -81,9 +81,9 @@ public class Centre extends Point {
     }
     @Override
     public String toString() {
-        String s =  "X = " + this.getX() + "\t Y = " + this.getY() + "\n Liste points (" +nbPoints + ") : " ;
+        String s =  "X = " + this.getX() + "\t Y = " + this.getY() + "\n Liste points (" +nbPoints + ") : \n" ;
         for(int i = 0; i < nbPoints; i++){
-            s += points[i] + "\n";
+            s += "\t-" +  points[i] + "\n";
         }
         return s;
     }
@@ -92,6 +92,8 @@ public class Centre extends Point {
         Centre c = new Centre(1,20);
         Point p = new Point(0, 0);
         c.setRandomRGB();
+        c.addPoint(p);
+        c.addPoint(p);
         c.addPoint(p);
         System.out.println(c);
     }
