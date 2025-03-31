@@ -114,13 +114,13 @@ public class Dessin extends PApplet{
         for(int i = 0; i < km.getNbClusters(); i++){ //On ajoute les cercles pour chaque cluster
             Point pt =  km.maxDistCluster(i);
             Cercle cercle = new Cercle(km.getCentres()[i].getDist(pt), km.getCentres()[i]);
-            cercle.setRGB(km.getCentres()[i].getR(), km.getCentres()[i].getG(), km.getCentres()[i].getB());
+            cercle.setRGB(km.getCentres()[i].getR(), km.getCentres()[i].getG(), km.getCentres()[i].getB()); //On copie la couleur du centre du cluster dans le cercle
             plan.addForme(cercle);
         }
         drawAllForme((plan.getFormes()), plan.getNbFormes());
 
         //Dessine le centre des clusters
-        strokeWeight(7);
+        strokeWeight(6);
         stroke(0,0,0);
         drawPoint(km.getCentres(),km.getNbClusters());
 
@@ -128,7 +128,7 @@ public class Dessin extends PApplet{
         Point[] arrayPoints;
         arrayPoints = plan.getPoints().toArray(new Point[plan.getNbPoints()]);
         stroke(255,0,0);
-        strokeWeight(5);
+        strokeWeight(4);
         drawPoint(arrayPoints, plan.getNbPoints());
 
         

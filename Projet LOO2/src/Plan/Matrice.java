@@ -20,6 +20,11 @@ public class Matrice {
         dimX = nvDimX;
         dimY = nvDimY;
         valeur = new float[dimY][dimX];
+        for(int y = 0; y < dimY; y++){
+            for(int x =0; x < dimX; x++){
+                valeur[y][x] = 0;
+            }
+        }
     }
 
     //Getter Setter
@@ -50,7 +55,7 @@ public class Matrice {
      * @param nvVal nouvelle valeur
      */
     public void setValeur(int x, int y, float nvVal){
-        if(x > 0 && x < dimX && y > 0 && y < dimY)
+        if(x >= 0 && x < dimX && y >= 0 && y < dimY)
             valeur[x][y] = nvVal;
         else{
             System.out.println("Erreur de paramètre, x ou y ne sont pas compris entre 0 et "+ dimX + " ou " + dimY);
@@ -64,7 +69,7 @@ public class Matrice {
      * @return la valeur en x et y
      */
     public float getValeur(int x, int y){
-        if(x > 0 && x < dimX && y > 0 && y < dimY)
+        if(x >= 0 && x < dimX && y >= 0 && y < dimY)
             return valeur[x][y];
         else{
             System.out.println("Erreur de paramètre, x ou y ne sont pas compris entre 0 et "+ dimX + " ou " + dimY);
@@ -105,11 +110,24 @@ public class Matrice {
         return resultat;
     }
 
+    @Override
+    public String toString() {
+        String s = "Matrice : \n";
+        for(int y = 0; y < dimY; y++){
+            for(int x = 0; x < dimX; x++){
+                s+= getValeur(x, y) + " ";
+            }
+            s+= "\n";
+        }
+        return s;
+    }
+
     public static void main(String[] args) {
-        Matrice m = new Matrice(1, 1);
+        Matrice m = new Matrice(2, 2);
         m.getTransposee();
         m.setValeur(0, 0, 1);
         m.getValeur(0, 0);
+        System.out.println(m);
         m.multiplicationMatrice(m);
     }
 }
