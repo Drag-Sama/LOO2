@@ -14,6 +14,7 @@ public class Kmeans {
     private int nbClusters;
     private Centre[] centres;
     private Plan plan;
+    private Matrice[] covariances;
 
     /**
      * Crée une classe Kmeans avec un Plan et son nombre de clusters
@@ -24,6 +25,7 @@ public class Kmeans {
         this.plan = plan;
         this.nbClusters = clusters;
         this.centres = new Centre[nbClusters];
+        this.covariances = new Matrice[nbClusters];
     }
 
     /**
@@ -72,7 +74,6 @@ public class Kmeans {
      */
     public void setPlan(Plan nvPlan){
         this.plan = nvPlan;
-        this.indicesCentres = new int[this.plan.getNbPoints()];
     }
 
     /**
@@ -81,6 +82,14 @@ public class Kmeans {
      */
     public Plan getPlan() {
         return this.plan;
+    }
+
+    public void setCovariances(Matrice[] mat) {
+        covariances = mat;
+    }
+
+    public Matrice[] getCovariances() {
+        return covariances;
     }
 
     /////// METHODES K-MEANS ////////
@@ -134,7 +143,7 @@ public class Kmeans {
     public void setupK_means() {
         Point[] arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         Collections.shuffle(Arrays.asList(arrayPoints));
-        for (int i = 0; i < this.getNbClusters(); i++) centres[i].copyPoints(arrayPoints[i]);
+        for (int i = 0; i < this.getNbClusters(); i++) centres[i].copyPoint(arrayPoints[i]);
     }
 
     /**
@@ -187,38 +196,52 @@ public class Kmeans {
     public Point maxDistCluster(int idCluster) throws IndexOutOfBoundsException, NegativeValue {
         if (idCluster >= getNbClusters()) throw new IndexOutOfBoundsException("L'id du cluster est trop grand");
         else if (idCluster < 0) throw new NegativeValue();
-        Point[] arrayPoints;
+        Point[] arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         float maxDist = 0;
         Point maxPoint = null;
-        arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
-        for(int i = 0; i < plan.getNbPoints(); i++){ // pour chaque point
-            if(indicesCentres[i] == idCluster){
-                float dist = centres[idCluster].getDist(arrayPoints[i]);
-                if(dist > maxDist){
-                    maxDist = dist;
-                    maxPoint = arrayPoints[i];
-                }
+        for(int i = 0; i < centres[idCluster].getNbPoints(); i++){ // pour chaque point du cluster
+            float dist = centres[idCluster].getDist(arrayPoints[i]);
+            if(dist > maxDist){
+                maxDist = dist;
+                maxPoint = arrayPoints[i];
             }
         }
         return maxPoint;
     }
 
-
-    public void matricesCovariances2D(Matrice[] matrices) {
+    /**
+     * calcule les matrices de covariances des clusters
+     * @param matrices
+     * pas de return -> effet de bord sur matrices
+     */
+    public void matricesCovariances2D() {
         Point[] points = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         for (int indCluster = 0; indCluster < getNbClusters(); indCluster++) { // pour chaque cluster
-            float moyenneX = 0;
-            float moyenneY = 0;
-            int nbPoints = 0;
+//            float moyenneX = 0;
+//            float moyenneY = 0;
+//            int nbPoints = 0;
+//            for (Point p : centres[indCluster].getPoints()) { // pour chaque point du plan
+//                moyenneX += p.getX(); // on ajoute son X et Y à leurs moyennes respectives
+//                moyenneY += p.getY();
+//                nbPoints++;
+//            }
+//            moyenneX /= nbPoints;
+//            moyenneX /= nbPoints;
+            matrices[indCluster] = new Matrice(2,2);
             for (Point p : centres[indCluster].getPoints()) { // pour chaque point du plan
-                moyenneX += p.getX(); // on ajoute son X et Y à leurs moyennes respectives
-                moyenneY += p.getY();
-                nbPoints++;
+                matrices[indCluster].setValeur(0,0,matrices[indCluster].getValeur(0,0) + (float) Math.pow(p.getX() - centres[indCluster].getX(),2)); // calcul des valeurs de la matrice de covariance
+                matrices[indCluster].setValeur(1,0,matrices[indCluster].getValeur(1,0)
+                        + (p.getX() - centres[indCluster].getX())*(p.getY() - centres[indCluster].getY()));
+                matrices[indCluster].setValeur(0,1,matrices[indCluster].getValeur(0,1)
+                        + (p.getX() - centres[indCluster].getX())*(p.getY() - centres[indCluster].getY()));
+                matrices[indCluster].setValeur(1,1,matrices[indCluster].getValeur(1,1) + (float) Math.pow(p.getY() - centres[indCluster].getY(),2));
             }
-            moyenneX /= nbPoints;
-            moyenneX /= nbPoints;
-
+            matrices[indCluster].setValeur(0,0,matrices[indCluster].getValeur(0,0) / centres[indCluster].getNbPoints());
+            matrices[indCluster].setValeur(1,0,matrices[indCluster].getValeur(1,0) / centres[indCluster].getNbPoints());
+            matrices[indCluster].setValeur(0,1,matrices[indCluster].getValeur(0,1) / centres[indCluster].getNbPoints());
+            matrices[indCluster].setValeur(1,1,matrices[indCluster].getValeur(1,1) / centres[indCluster].getNbPoints());
         }
+
     }
 
     /**
@@ -252,6 +275,7 @@ public class Kmeans {
         plan.addPoint(point6);
         Kmeans km = new Kmeans(plan,3);
         km.k_means();
+        km.matricesCovariances2D();
     }
 }
 
