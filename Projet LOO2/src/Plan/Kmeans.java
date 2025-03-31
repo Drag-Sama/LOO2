@@ -16,7 +16,6 @@ public class Kmeans {
     private int[] indicesCentres; // liste d'entiers représentant l'indice (dans la liste) des
                                   // centres attribuées aux points;
 
-
     /**
      * Crée une classe Kmeans avec un Plan et son nombre de clusters
      * @param plan
