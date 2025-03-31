@@ -9,7 +9,7 @@ import exceptions.NegativeValue;
  * @param nbPoints le nombre de points attribués à ce centre
  */
 public class Centre extends Point {
-    private Point[] points;
+    private Point[] points = new Point[0];
     private int nbPoints;
 
     /**
@@ -23,7 +23,17 @@ public class Centre extends Point {
     }
 
     public void addPoint(Point p) {
-        points.
+        copyPoints(points, nbPoints + 1);
+        points[nbPoints] = p;
+        nbPoints += 1;
+    }
+
+    public void copyPoints(Point[] lpt, int nvSize){
+        System.out.println(lpt.length);
+        points = new Point[nvSize];
+        for(int i = 0; i < lpt.length; i++){
+            points[i] = lpt[i];
+        }
     }
 
     public void setNbPoints(int v) {
@@ -40,5 +50,21 @@ public class Centre extends Point {
 
     public Point[] getPoints() {
         return points;
+    }
+    @Override
+    public String toString() {
+        String s =  "X = " + this.getX() + "\t Y = " + this.getY() + "\n Liste points : ";
+        for(int i = 0; i < nbPoints; i++){
+            s += points[i] + "\n";
+        }
+        return s;
+    }
+
+    public static void main(String[] args) {
+        Centre c = new Centre(1,20);
+        Point p = new Point(0, 0);
+        c.setRandomRGB();
+        c.addPoint(p);
+        System.out.println(c);
     }
 }
