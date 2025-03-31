@@ -189,6 +189,10 @@ public class Kmeans {
             for (int j = 0; j < this.getNbClusters(); j++) System.out.println(" -  " + centres[j].getX() + " " + centres[j].getY());
             centres[i] = nvCentre;
         }
+        for (int i = 0; i < this.getPlan().getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
+            centres[arrayPoints[i].getMinDistPoint(centres)].addPoint(arrayPoints[i]); // on attribue le point i au centre le plus proche.
+            System.out.println(centres[arrayPoints[i].getMinDistPoint(centres)]);
+        }
         return centresModif;
     }
 
