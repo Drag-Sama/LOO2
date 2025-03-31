@@ -1,7 +1,7 @@
 package Plan;
 
 import Point.Point;
-import Point.Centre
+import Point.Centre;
 import exceptions.NegativeValue;
 import exceptions.PointIsNull;
 
@@ -26,8 +26,6 @@ public class Kmeans {
         this.plan = plan;
         this.nbClusters = clusters;
         this.centres = new Centre[nbClusters];
-        this.indicesCentres = new int[this.plan.getNbPoints()];
-
     }
 
     /**
@@ -87,30 +85,6 @@ public class Kmeans {
         return this.plan;
     }
 
-    /**
-     * Renvoie la liste des indices des centres indicesCentres.
-     * @return la liste des indices des centres indicesCentres (liste d'entiers / int[])
-     */
-    public int[] getIndicesCentres () {return this.indicesCentres;}
-
-    /**
-     * Remplace la liste des indices des centres indicesCentres par une nouvelle.
-     * @param indicesCentres la nouvelle liste des indices des centres
-     * @throws NegativeValue
-     * @throws IndexOutOfBoundsException
-     */
-    public void setIndicesCentres (int[] indicesCentres) throws NegativeValue,IndexOutOfBoundsException {
-        if (Arrays.stream(indicesCentres).anyMatch(ind -> ind < 0)) {
-            throw new NegativeValue();
-        }
-        else if (Arrays.stream(indicesCentres).anyMatch(ind -> ind >= this.getNbClusters())) {
-            throw new IndexOutOfBoundsException("L'un des indices de la liste d'indices est trop grand.");
-        }
-        else {
-            this.indicesCentres = indicesCentres;
-        }
-    }
-
     /////// METHODES K-MEANS ////////
 
     /**
@@ -128,27 +102,24 @@ public class Kmeans {
         boolean centresModif = true;
         while (centresModif) { // tant que les centres ont été modifiés (à chaque itération) :
             for (int i = 0; i < this.plan.getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
-                centres[arrayPoints[i].getMinDistPoint(centres)].; // on attribue le centre d'indice min au point i
+                centres[arrayPoints[i].getMinDistPoint(centres)].addPoint(arrayPoints[i]); // on attribue le point i au centre le plus proche.
             }
             centresModif = false;
             for (int i = 0; i < nbClusters; i++) { // pour chaque cluster
                 float nv_x = 0;
                 float nv_y = 0;
                 int nb = 0;
-                for (int j = 0; j < this.plan.getNbPoints(); j++) { // pour chaque points, on vérifie si son centre est d'indice i
-                    System.out.println(" -  " + indicesCentres[j]);
-                    if (indicesCentres[j] == i) {
-                        ; // si oui -> ajoute son x et y
-                        nv_x += arrayPoints[j].getX();
-                        nv_y += arrayPoints[j].getY();
-                        nb++;
-                    }
+                for (Point p : centres[i].getPoints()) { // pour chaque points de ce cluster
+                    //-> ajoute son x et y
+                    nv_x += p.getX();
+                    nv_y += p.getY();
+                    nb++;
                 }
                 if (nb == 0) {
                     throw new ArithmeticException(); // pas de try catch pour celle-ci car la division par zéro ne cause pas d'erreur mais renvoie Infinity.
                 }
-                    nv_x /= nb; // on calcule les moyennes des x et y obtenues -> nouveau centre
-                    nv_y /= nb;
+                nv_x /= nb; // on calcule les moyennes des x et y obtenues -> nouveau centre
+                nv_y /= nb;
                 Centre nvCentre = new Centre(nv_x, nv_y);
                 if (nvCentre.getX() != centres[i].getX() || nvCentre.getY() != centres[i].getY()) centresModif = true;
                 System.out.println("Modif centres : ");
@@ -165,7 +136,7 @@ public class Kmeans {
     public void setupK_means() {
         Point[] arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         Collections.shuffle(Arrays.asList(arrayPoints));
-        for (int i = 0; i < this.getNbClusters(); i++) centres[i] = arrayPoints[i];
+        for (int i = 0; i < this.getNbClusters(); i++) centres[i] = (Centre)arrayPoints[i];
     }
 
     /**
@@ -180,31 +151,28 @@ public class Kmeans {
         System.out.println("Nb Points : " + plan.getNbPoints());
         Collections.shuffle(Arrays.asList(arrayPoints)); // mélange la liste arrayPoints
         for (int i = 0; i < this.plan.getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
-            indicesCentres[i] = arrayPoints[i].getMinDistPoint(centres); // on attribue le centre d'indice min au point i
+            centres[arrayPoints[i].getMinDistPoint(centres)].addPoint(arrayPoints[i]); // on attribue le point i au centre le plus proche.
         }
+        centresModif = false;
         for (int i = 0; i < nbClusters; i++) { // pour chaque cluster
             float nv_x = 0;
             float nv_y = 0;
             int nb = 0;
-            System.out.println("Tableau indices centres : ");
-            for (int j = 0; j < this.plan.getNbPoints(); j++) { // pour chaque point, on vérifie si son centre est d'indice i
-                System.out.println(" -  " + indicesCentres[j]);
-                if (indicesCentres[j] == i) {
-                    ; // si oui → ajoute son x et y.
-                    nv_x += arrayPoints[j].getX();
-                    nv_y += arrayPoints[j].getY();
-                    nb++;
-                }
+            for (Point p : centres[i].getPoints()) { // pour chaque points de ce cluster
+                //-> ajoute son x et y
+                nv_x += p.getX();
+                nv_y += p.getY();
+                nb++;
             }
             if (nb == 0) {
-                throw new ArithmeticException(); // pas de try catch pour celle-ci, car la division par zéro ne cause pas d'erreur mais renvoie Infinity.
+                throw new ArithmeticException(); // pas de try catch pour celle-ci car la division par zéro ne cause pas d'erreur mais renvoie Infinity.
             }
             nv_x /= nb; // on calcule les moyennes des x et y obtenues -> nouveau centre
             nv_y /= nb;
-            Point nvCentre = new Point(nv_x, nv_y);
-            if (nvCentre.getX() != centres[i].getX() || nvCentre.getY() != centres[i].getY()) centresModif = true; // si le centre a été modifié
+            Centre nvCentre = new Centre(nv_x, nv_y);
+            if (nvCentre.getX() != centres[i].getX() || nvCentre.getY() != centres[i].getY()) centresModif = true;
             System.out.println("Modif centres : ");
-            for (int j = 0; j < this.getNbClusters(); j++) System.out.println(" -  " + centres[j].getX() + " " + centres[j].getY()); // pour afficher
+            for (int j = 0; j < this.getNbClusters(); j++) System.out.println(" -  " + centres[j].getX() + " " + centres[j].getY());
             centres[i] = nvCentre;
         }
         return centresModif;
@@ -244,7 +212,7 @@ public class Kmeans {
             float moyenneX = 0;
             float moyenneY = 0;
             int nbPoints = 0;
-            for (int indPoint = 0; indPoint < getPlan().getNbPoints(); indPoint++) { // pour chaque point du plan
+            for (Point p : centres[indCluster].getPoints()) { // pour chaque point du plan
                 if (getIndicesCentres()[indPoint] == indCluster) { // si le point appartient au cluster
                     moyenneX += points[indPoint].getX(); // on ajoute son X et Y à leurs moyennes respectives
                     moyenneY += points[indPoint].getY();
