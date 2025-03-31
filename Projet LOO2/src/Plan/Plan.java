@@ -17,7 +17,7 @@ import exceptions.PointIsNull;
  * @param nbPoints le nombre de points dans le plan
  */
 public class Plan {
-    private LinkedHashSet<Forme> formes = new LinkedHashSet<Forme>();
+    private Forme[] formes = new Forme[50];
     private int nbFormes;
     private LinkedHashSet<Point> points = new LinkedHashSet<Point>();
     private int nbPoints;
@@ -36,7 +36,7 @@ public class Plan {
      * Renvoie la liste des formes du plan
      * @return la liste des formes du plan (Hashset)
      */
-    public LinkedHashSet<Forme> getFormes() {
+    public Forme[] getFormes() {
         return formes;
     }
 
@@ -68,10 +68,14 @@ public class Plan {
      * Remplace la liste des formes par une nouvelle
      * @param formes la nouvelle liste des formes du plan
      */
-    public void setFormes(LinkedHashSet<Forme> formes) throws FormeIsNull {
-        if (formes.stream().anyMatch(Objects::isNull)) throw new FormeIsNull("L'une des formes de la nouvelle liste = null");
-        this.formes = formes;
-        setNbFormes(formes.size());
+    public void setFormes(Forme[] nvFormes) throws FormeIsNull {
+        for(int i = 0; i < nvFormes.length; i++){
+            if(nvFormes[i] == null){
+                throw new FormeIsNull("L'une des formes de la nouvelle liste = null");
+            }
+        }
+        this.formes = nvFormes;
+        setNbFormes(nvFormes.length);
     }
 
     /**
@@ -105,6 +109,11 @@ public class Plan {
         this.nbPoints = nbPoints;
     }
 
+    public void resetForme(){
+        nbFormes = 0;
+        formes = new Forme[50];
+    }
+
 
     ///////// METHODES ////////////
 
@@ -112,9 +121,9 @@ public class Plan {
      * Ajoute une forme à la liste des formes du plan et actualise nbFormes
      * @param forme à ajouter
      */
-    public void addForme(Forme forme) throws FormeIsNull {
-        if (forme == null) throw new FormeIsNull("La nouvelle forme = null");
-        this.formes.add(forme);
+    public void addForme(Forme nvForme) throws FormeIsNull {
+        if (nvForme == null) throw new FormeIsNull("La nouvelle forme = null");
+        formes[nbFormes] = nvForme;
         this.setNbFormes(this.getNbFormes()+1);
     }
 
@@ -124,9 +133,17 @@ public class Plan {
      * @return true si elle a pu être retirée, false sinon.
      */
     public boolean removeForme(Forme forme) {
-        if (this.formes.remove(forme)) {
-            this.setNbFormes(this.getNbFormes()-1);
-            return true;
+        boolean formeFound = false;
+        for(int i = 0; i < nbFormes; i++){
+            if(!formeFound){
+                if(formes[i] == forme){
+                    formeFound = true;
+                }
+            }
+            else{
+                formes[i-1] = formes[i];
+            }
+            
         }
         return false;
     }

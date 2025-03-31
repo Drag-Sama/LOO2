@@ -106,20 +106,26 @@ public class Polygone extends Forme {
         }
 
         //On trie les points selon leur angle pour les mettre dans l'ordre
+        Point[] ancPoint = new Point[50]; //Liste des points avant modification
         HashSet<Integer> pointUsed = new HashSet<Integer>();
         int nbPointUsed = 0;
         while(nbPointUsed != nbPoints){
             double minAngle = 360;
-            int j = 0;
+            int indiceMin = 0;
             for(int i = 0; i < nbPoints; i++){// pour tous les points du polygone
-                if(angle[i] < minAngle && pointUsed.contains(i)){
+                if(angle[i] < minAngle && !pointUsed.contains(i)){
                     minAngle = angle[i];
-                    j = i;
+                    indiceMin = i;
+                }
+
+                if(nbPointUsed == 0){//Si c'est la première fois qu'on est dans la boucle
+                    ancPoint[i] = points[i];//On copie les valeurs de la liste de point de base dans une nouvelle liste
                 }
             }
-            pointUsed.add(j);
+            pointUsed.add(indiceMin);
+            points[nbPointUsed] = ancPoint[indiceMin];
             nbPointUsed += 1;
-            points[nbPointUsed] = points[j];
+           
         }
         
     }
