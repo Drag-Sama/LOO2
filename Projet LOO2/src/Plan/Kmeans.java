@@ -110,8 +110,9 @@ public class Kmeans {
         }
         boolean centresModif = true;
         while (centresModif) { // tant que les centres ont été modifiés (à chaque itération) :
-            for (int i = 0; i < this.plan.getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
+            for (int i = 0; i < this.getPlan().getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
                 centres[arrayPoints[i].getMinDistPoint(centres)].addPoint(arrayPoints[i]); // on attribue le point i au centre le plus proche.
+                System.out.println(centres[arrayPoints[i].getMinDistPoint(centres)]);
             }
             centresModif = false;
             for (int i = 0; i < nbClusters; i++) { // pour chaque cluster
