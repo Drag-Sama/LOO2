@@ -10,6 +10,7 @@ import exceptions.NegativeValue;
 public class Point {
     float x;
     float y;
+    int r,g,b;
 
     /**
      * Crée un point avec les coordonnées X,Y

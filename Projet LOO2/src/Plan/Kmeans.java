@@ -59,7 +59,7 @@ public class Kmeans {
     /**
      * Remplace la liste des centres (Point[]) par une nouvelle.
      * @param centres la nouvelle liste des centres
-     * @throws PointIsNull
+     * @throws Null
      */
     public void setCentres(Point[] centres) throws PointIsNull {
         if (centres == null || Arrays.stream(centres).anyMatch(Objects::isNull)){
@@ -77,6 +77,14 @@ public class Kmeans {
     public void setPlan(Plan nvPlan){
         this.plan = nvPlan;
         this.indicesCentres = new int[this.plan.getNbPoints()];
+    }
+
+    /**
+     * Retourne le plan associé
+     * @return le plan associé (Plan)
+     */
+    public Plan getPlan() {
+        return this.plan;
     }
 
     /**
@@ -103,20 +111,6 @@ public class Kmeans {
         }
     }
 
-    /**
-     * Retourne un tableau de d'entiers uniques aléatoire de 0 à max.
-     * @param max
-     * @return le tableau d'entiers aléatoires
-     */
-    public int[] TabIntAleaDistinct(int max) {
-        Random randNum = new Random();
-        Set<Integer> set = new LinkedHashSet<Integer>();
-        while (set.size() < max) {
-            set.add(randNum.nextInt(10)+1);
-        }
-        return null;
-    }
-
     /////// METHODES K-MEANS ////////
 
     /**
@@ -124,6 +118,7 @@ public class Kmeans {
      * pas de params
      * pas de return -> tout en effet de bord sur ses propres attributs.
      * @throws ArithmeticException
+     * @throws NegativeValue
      * */
     public void k_means() throws ArithmeticException, NegativeValue{
         Point[] arrayPoints;
@@ -165,6 +160,7 @@ public class Kmeans {
 
     /**
      * Mise en place pour le k_means classique
+     * -> initialise la liste centres en choisissant aléatoirement des points du plan.
      */
     public void setupK_means() {
         Point[] arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
@@ -215,7 +211,8 @@ public class Kmeans {
     }
 
     /**
-     * D'où ça sort ?
+     * Calcule le point le plus loin du cluster.
+     * Utilisé pour calculer le rayon / diamètre du cercle pour celui-ci.
      * @param idCluster
      * @return le point le plus loin du cluster représenté par son id
      * @throws IndexOutOfBoundsException
@@ -238,6 +235,35 @@ public class Kmeans {
             }
         }
         return maxPoint;
+    }
+
+
+    public void matricesCovariances2D(Matrice[] matrices) {
+        Point[] points = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
+        for (int indCluster = 0; indCluster < getNbClusters(); indCluster++) { // pour chaque cluster
+            float moyenneX = 0;
+            float moyenneY = 0;
+            int nbPoints = 0;
+            for (int indPoint = 0; indPoint < getPlan().getNbPoints(); indPoint++) { // pour chaque point du plan
+                if (getIndicesCentres()[indPoint] == indCluster) { // si le point appartient au cluster
+                    moyenneX += points[indPoint].getX(); // on ajoute son X et Y à leurs moyennes respectives
+                    moyenneY += points[indPoint].getY();
+                    nbPoints++;
+                }
+            }
+            moyenneX /= nbPoints;
+            moyenneX /= nbPoints;
+
+        }
+    }
+
+    /**
+     * Réalise l'algorithme k-means classique  pour le plan en attribut en utilisant tous les points de celui-ci
+     * pas de params
+     * pas de return -> tout en effet de bord sur ses propres attributs.
+     */
+    public void elongatedKmeans() {
+
     }
 
     public static void main(String[] args) throws NegativeValue{

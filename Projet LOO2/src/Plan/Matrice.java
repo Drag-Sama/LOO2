@@ -2,15 +2,20 @@ package Plan;
 
 /**
  * Matrice
- * @param dimX La taille x de la matrice
- * @param dimY La taille y de la matrice
- * @param valeur Les valeurs de la matrice
+ * @param dimX La taille x de la matrice (int)
+ * @param dimY La taille y de la matrice (int)
+ * @param valeur Les valeurs de la matrice (float)
  */
 public class Matrice {
     private int dimX;
     private int dimY;
     float valeur[][];
 
+    /**
+     * Crée une matrice de taille nvDimX * nvDimY (int)
+     * @param nvDimX (float)
+     * @param nvDimY (float)
+     */
     public Matrice(int nvDimX, int nvDimY){
         dimX = nvDimX;
         dimY = nvDimY;
