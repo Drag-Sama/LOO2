@@ -6,12 +6,12 @@ import exceptions.NegativeValue;
 /**
  * @param x Position x du point
  * @param y Position y du point
- * @param r,g,b La couleur rgb attribué au point
+ * @param rgb La couleur rgb attribué au point
  */
 public class Point {
     float x;
     float y;
-    int r,g,b;
+    int[] rgb = new int[3];
 
     /**
      * Crée un point avec les coordonnées X,Y
@@ -69,39 +69,20 @@ public class Point {
     }
 
     /**
-     * Renvoie la variable R de la couleur RGB attribué au point
-     * @return r
+     * Renvoie la couleur RGB attribué au point
+     * @return rgb
      */
-    public int getR(){
-        return r;
+    public int[] getRgb(){
+        return rgb;
     }
 
-    /**
-     * Renvoie la variable G de la couleur RGB attribué au point
-     * @return g
-     */
-    public int getG(){
-        return g;
-    }
-
-    /**
-     * Renvoie la variable B de la couleur RGB attribué au point
-     * @return b
-     */
-    public int getB(){
-        return b;
-    }
 
     /**
      * Permet de changer la couleur RGB attribué au point
-     * @param nvR la nouvelle variable R
-     * @param nvG la nouvelle variable G
-     * @param nvB la nouvelle variable B
+     * @param nvRgb la nouvelle variable Rgb
      */
-    public void setRGB(int nvR, int nvG, int nvB){
-        r = nvR;
-        g = nvG;
-        b = nvB;
+    public void setRGB(int[] nvRgb){
+        rgb = nvRgb;
     }
 
     /**
@@ -116,7 +97,11 @@ public class Point {
      * Permet de changer la couleur de la forme aléatoirement
      */
     public void setRandomRGB() {
-        setRGB(getRandomNumber(), getRandomNumber(), getRandomNumber());
+        int[] nvRgb = new int[3];
+        for(int i = 0; i < 3; i++){
+            nvRgb[i] = getRandomNumber();
+        }
+        setRGB(nvRgb);
     }
 
     /** Calcule la distance entre le point d'origine et le point en paramètre
