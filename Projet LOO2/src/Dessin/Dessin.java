@@ -27,13 +27,15 @@ public class Dessin extends PApplet{
             
 
     /**
-     * Permet de changer les paramètres de base du dessin
+     * Permet de changer les paramètres de base du dessin (prédéfinie par Processing)
      */
     public void settings(){
         size(1400, 1000);
     }
 
-
+    /**
+     * Permet une mise en place avant le dessin (prédéfinie par Processing)
+     */
     public void setup(){
         background(255);
         for(int i = 0; i < 30; i ++){
@@ -46,6 +48,9 @@ public class Dessin extends PApplet{
         System.out.println("Setup terminé");
     }
 
+    /**
+     * Permet de dessiner (prédéfinie par la bibliothèque graphique : Processing) -> se recall indéfiniment
+     */
     public void draw() {
         Scanner scan = new Scanner(System.in);
         
@@ -90,7 +95,7 @@ public class Dessin extends PApplet{
     }
 
     /**
-     * Charge et dessine une image selon la sauvegarde actuel
+     * Charge et dessine une image selon la sauvegarde actuelle
      */
     public void loadAndDrawImage(){
         background(255);
