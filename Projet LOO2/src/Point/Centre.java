@@ -52,7 +52,7 @@ public class Centre extends Point {
     public void copyPoint(Point p){
         x = p.getX();
         y = p.getY();
-        setRGB(p.getR(), p.getG(), p.getB());
+        setRGB(p.getRgb());
     }
 
     /**

@@ -6,7 +6,7 @@ import Point.Point;
 /**
  * Classe abstraite d'une forme
  * @param centre Le centre de la forme
- * @param r,g,b La couleur de la forme
+ * @param rgb La couleur de la forme
  */
 public abstract class Forme {
     /**
@@ -16,7 +16,7 @@ public abstract class Forme {
     /**
      * Couleur de la forme composée de 3 int :  r g b
      */
-    int r = 0, g = 0, b = 0;
+    int[] rgb = new int[3];
 
 
     /**
@@ -38,43 +38,22 @@ public abstract class Forme {
     }
 
     /**
-     * Renvoie le r de la couleur de la forme
+     * Renvoie la couleur de la forme
      *
-     * @return R
+     * @return rgb
      */
-    public int getR() {
-        return r;
+    public int[] getRgb() {
+        return rgb;
     }
 
-    /**
-     * Renvoie le g de la couleur de la forme
-     *
-     * @return G
-     */
-    public int getG() {
-        return g;
-    }
-
-    /**
-     * Renvoie le b de la couleur de la forme
-     *
-     * @return B
-     */
-    public int getB() {
-        return b;
-    }
 
     /**
      * Permet de change la couleur de la forme avec les 3 paramètres (R,G,B)
      *
-     * @param nvR R
-     * @param nvG G
-     * @param nvB B
+     * @param nvRgb Rgb
      */
-    public void setRGB(int nvR, int nvG, int nvB) {
-        r = nvR;
-        g = nvG;
-        b = nvB;
+    public void setRGB(int[] nvRgb) {
+        rgb = nvRgb;
     }
 
     /**
@@ -90,7 +69,10 @@ public abstract class Forme {
      * Permet de changer la couleur de la forme aléatoirement
      */
     public void setRandomRGB() {
-        setRGB(getRandomNumber(), getRandomNumber(), getRandomNumber());
+        int[] nvRgb = new int[3];
+        for(int i = 0; i < 3; i++){
+            nvRgb[i] = getRandomNumber();
+        }
+        setRGB(nvRgb);
     }
-
 }
