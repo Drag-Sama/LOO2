@@ -83,10 +83,10 @@ public class Plan {
      * @param points la nouvelle liste des points du plan
      */
 
-    public void setPoints(LinkedHashSet<Point> points) throws PointIsNull {
+    public void setPoints(LinkedHashSet<Point> nvPoints) throws PointIsNull {
         if (points.stream().anyMatch(Objects::isNull)) throw new PointIsNull("L'un des points de la nouvelle liste = null.");
-        this.points = points;
-        setNbPoints(points.size());
+        this.points = nvPoints;
+        setNbPoints(nvPoints.size());
     }
 
     /**
@@ -109,13 +109,18 @@ public class Plan {
         this.nbPoints = nbPoints;
     }
 
+   
+
+
+    ///////// METHODES ////////////
+
+    /**
+     * Vide le plan de toutes les formes
+     */
     public void resetForme(){
         nbFormes = 0;
         formes = new Forme[50];
     }
-
-
-    ///////// METHODES ////////////
 
     /**
      * Ajoute une forme à la liste des formes du plan et actualise nbFormes
