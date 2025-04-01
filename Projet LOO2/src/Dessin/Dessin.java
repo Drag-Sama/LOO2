@@ -1,4 +1,5 @@
 package Dessin;
+import exceptions.IdenticalPoints;
 import processing.core.PApplet;
 import processing.core.PImage;
 import Formes.Polygone;
@@ -22,8 +23,8 @@ public class Dessin extends PApplet{
     
     Plan plan = new Plan();
     int act_save = 0; // indice de la sauvegarde actuelle.
-    int nb_save = 0; //Nombre d'image sauvegardé et donc d'étape effectué 
-    Kmeans km = new Kmeans(plan,27);
+    int nb_save = 0; //Nombre d'images sauvegardées et donc d'étapes effectuées
+    Kmeans km;
             
 
     /**
@@ -36,14 +37,52 @@ public class Dessin extends PApplet{
     /**
      * Permet une mise en place avant le dessin (prédéfinie par Processing)
      */
-    public void setup(){
+    public void setup() throws IdenticalPoints{
         background(255);
-        for(int i = 0; i < 30; i ++){
-            Point point = new Point(0,0);
-            point.setRandom(1400,1000);
-            plan.addPoint(point);
-    }
-        km.setPlan(plan);
+        Scanner scan = new Scanner(System.in);
+        boolean identical = true;
+        System.out.println("Mise en place des points aléatoire : 0 \nMise en place des points manuelle : 1 \nScénarios critiques : 2");
+        int repUser = scan.nextInt();
+        if (repUser == 0) { // si rep = 0, on remplit le plan par des points aléatoires.
+            System.out.println("Combien de points ? ");
+            repUser = scan.nextInt();
+            for(int i = 0; i < repUser; i++){
+                System.out.println("Réponse : " + repUser);
+                System.out.println(i);
+                Point point = new Point(0,0);
+                point.setRandom(1400,1000);
+                plan.addPoint(point);
+            }
+        }
+        else if (repUser == 1) {
+            System.out.println("Combien de points ? ");
+            repUser = scan.nextInt();
+            for(int i = 0; i < repUser; i ++){
+                System.out.println("Nouveau Point : \n \t X ? ");
+                int X = scan.nextInt();
+                System.out.println("\t Y ? ");
+                int Y = scan.nextInt();
+                Point point = new Point(X,Y);
+                plan.addPoint(point);
+            }
+        }
+        else {
+            System.out.println("Scénario des points identiques : 0 \nScénario - : 1");
+            repUser = scan.nextInt();
+            if (repUser == 0) ScenarioIdenticalPoints();
+            //else
+        }
+        Point[] arrayPoints = plan.getPoints().toArray((new Point[plan.getNbPoints()]));
+
+        for (int i = 1; i < plan.getNbPoints(); i++) {
+            if (arrayPoints[i] != arrayPoints[i-1]) {
+                identical = false;
+                break;
+            }
+        }
+        if (identical) throw new IdenticalPoints();
+
+        km = new Kmeans(plan,3);
         km.setupK_means();
         System.out.println("Setup terminé");
     }
@@ -51,20 +90,16 @@ public class Dessin extends PApplet{
     /**
      * Permet de dessiner (prédéfinie par la bibliothèque graphique : Processing) -> se recall indéfiniment
      */
-    public void draw() {
+    public void draw() throws NegativeValue {
         Scanner scan = new Scanner(System.in);
-        
-       
         background(255);
         try{
             System.out.println("Etape actuel : " + act_save + "\nNombre d'étape max : " + nb_save + " \n ------------ \nEtape précédente : 0\nEtape suivante : 1");
             int userAns = scan.nextInt();
-
             if(userAns == 1){
-                background(255);
-                
-                if(act_save == nb_save){ //Si il il n'y a pas d'image sauvegardé pour l'étape suivante
-                    drawKmeans(plan,km);
+                background(255); //Pour dissocier chaque dessin → sinon les dessins se fusionnent.
+                if(act_save == nb_save){ //S'il n'y a pas d'image sauvegardée pour l'étape suivante
+                    drawKmeans();
                     save("StockDessin\\dessin" + act_save + ".jpg");
                     act_save += 1;
                     nb_save += 1;
@@ -82,15 +117,14 @@ public class Dessin extends PApplet{
                 else{
                     System.out.println("Erreur, il n'y a pas d'étape précédente");
                 }
-                
             }
-
-            
         }
         catch(NegativeValue e){
             e.printStackTrace();
         }
-        
+    }
+
+    public void ScenarioIdenticalPoints() {
 
     }
 
@@ -111,7 +145,7 @@ public class Dessin extends PApplet{
      * @param km (Kmeans)
      * pas de return
      */
-    public void drawKmeans(Plan plan,Kmeans km) throws NegativeValue{
+    public void drawKmeans() throws NegativeValue{
         km.k_meansOneStep();
         background(255);
 
@@ -136,9 +170,6 @@ public class Dessin extends PApplet{
         stroke(255,0,0);
         strokeWeight(4);
         drawPoint(arrayPoints, plan.getNbPoints());
-
-        
-        
     }
 
     /**
