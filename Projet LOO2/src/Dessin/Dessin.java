@@ -37,24 +37,6 @@ public class Dessin extends PApplet{
         Scanner scan = new Scanner(System.in);
         boolean identical = true;
 
-        System.out.println("Maximum X du plan ? ");
-        repUser = scan.nextInt();
-        while (repUser < 0) {
-            System.out.println("-- Valeur négative ! --");
-            System.out.println("Maximum X du plan ? ");
-            repUser = scan.nextInt();
-        }
-        MAX_X = repUser;
-
-        System.out.println("Maximum Y du plan ? ");
-        repUser = scan.nextInt();
-        while (repUser < 0) {
-            System.out.println("-- Valeur négative ! --");
-            System.out.println("Maximum Y du plan ? ");
-            repUser = scan.nextInt();
-        }
-        MAX_Y = repUser;
-
         System.out.println("Mise en place des points aléatoire : 0 \nMise en place des points manuelle : 1 \nScénarios critiques : 2");
         repUser = scan.nextInt();
         while (repUser < 0 || repUser > 2) {
@@ -121,6 +103,8 @@ public class Dessin extends PApplet{
             System.out.println("Nombre de clusters ? ");
             repUser = scan.nextInt();
             km.setNbClusters(repUser);
+            if (km.getNbClusters() < Math.sqrt(plan.getNbPoints())) System.out.println("!! Attention : votre nombre de cluster est sûrement trop petit !!");
+            else if (km.getNbClusters() > Math.pow(plan.getNbPoints(),2)) System.out.println("!! Attention : votre nombre de cluster est sûrement trop grand !!");
         }
 
         Point[] arrayPoints = plan.getPoints().toArray((new Point[plan.getNbPoints()]));
@@ -142,6 +126,25 @@ public class Dessin extends PApplet{
      * Permet de changer les paramètres de base du dessin (prédéfinie par Processing)
      */
     public void settings(){
+        int repUser;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Maximum X du plan ? ");
+        repUser = scan.nextInt();
+        while (repUser < 0) {
+            System.out.println("-- Valeur négative ! --");
+            System.out.println("Maximum X du plan ? ");
+            repUser = scan.nextInt();
+        }
+        MAX_X = repUser;
+
+        System.out.println("Maximum Y du plan ? ");
+        repUser = scan.nextInt();
+        while (repUser < 0) {
+            System.out.println("-- Valeur négative ! --");
+            System.out.println("Maximum Y du plan ? ");
+            repUser = scan.nextInt();
+        }
+        MAX_Y = repUser;
         size(MAX_X, MAX_Y);
     }
 
@@ -205,8 +208,6 @@ public class Dessin extends PApplet{
 
     /**
      * Actuellement un simple test pour kmeans
-     * @param plan
-     * @param km (Kmeans)
      * pas de return
      */
     public void drawKmeans() throws NegativeValue{
