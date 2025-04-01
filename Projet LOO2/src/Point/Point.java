@@ -125,7 +125,7 @@ public class Point {
      * @return la distance entre les deux points
      */
     public float getDist(Point a){
-        return Math.abs(this.x - a.getX()) + Math.abs(this.y - a.getY());
+        return (float) Math.sqrt(Math.pow((a.getX() - this.getX()), 2) + Math.pow((a.getY() - this.getY()), 2));
     }
 
     /**
