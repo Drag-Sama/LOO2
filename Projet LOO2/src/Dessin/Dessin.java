@@ -64,7 +64,7 @@ public class Dessin extends PApplet{
                 background(255);
                 
                 if(act_save == nb_save){ //Si il il n'y a pas d'image sauvegardé pour l'étape suivante
-                    drawKmeans(plan,km);
+                    drawKmeans();
                     save("StockDessin\\dessin" + act_save + ".jpg");
                     act_save += 1;
                     nb_save += 1;
@@ -111,7 +111,7 @@ public class Dessin extends PApplet{
      * @param km (Kmeans)
      * pas de return
      */
-    public void drawKmeans(Plan plan,Kmeans km) throws NegativeValue{
+    public void drawKmeans() throws NegativeValue{
         km.k_meansOneStep();
         background(255);
 
