@@ -33,8 +33,8 @@ public abstract class Forme {
      *
      * @param centre le nouveau centre
      */
-    public void setCentre(Point centre) {
-        this.centre = centre;
+    public void setCentre(Point nvCentre) {
+        this.centre = nvCentre;
     }
 
     /**
@@ -82,7 +82,7 @@ public abstract class Forme {
      *
      * @return
      */
-    public int getRandomNumber() {
+    private int getRandomNumber() {
         return (int) ((Math.random() * (255)));
     }
 
