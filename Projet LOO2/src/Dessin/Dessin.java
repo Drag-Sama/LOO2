@@ -25,7 +25,7 @@ public class Dessin extends PApplet{
     Plan plan = new Plan();
     int act_save = 0; // indice de la sauvegarde actuelle.
     int nb_save = 0; //Nombre d'images sauvegardées et donc d'étapes effectuées
-    Kmeans km;
+    Kmeans km = new Kmeans(plan,0);
 
 
     /**
@@ -116,7 +116,7 @@ public class Dessin extends PApplet{
         }
         if (identical) throw new IdenticalPoints();
 
-        km = new Kmeans(plan,3);
+        km.setPlan(plan);
         km.setupK_means();
         System.out.println("Setup terminé");
     }

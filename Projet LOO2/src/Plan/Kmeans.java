@@ -42,6 +42,7 @@ public class Kmeans {
     public void setNbClusters(int clusters) throws NegativeValue{
         if (clusters >= 0) {
             this.nbClusters = clusters;
+            this.centres = new Centre[nbClusters];
         }
         else {
             throw new NegativeValue();
