@@ -218,7 +218,7 @@ public class Dessin extends PApplet{
             Point pt =  km.maxDistCluster(i);
             System.out.println(km.getCentres()[i] + " rayon : " + km.getCentres()[i].getDist(pt) + " Max dist " + pt);
             Cercle cercle = new Cercle(km.getCentres()[i].getDist(pt) * 2, km.getCentres()[i]);
-            cercle.setRGB(km.getCentres()[i].getR(), km.getCentres()[i].getG(), km.getCentres()[i].getB()); //On copie la couleur du centre du cluster dans le cercle
+            cercle.setRGB(km.getCentres()[i].getRgb()); //On copie la couleur du centre du cluster dans le cercle
             plan.addForme(cercle);
         }
         drawAllForme((plan.getFormes()), plan.getNbFormes());
@@ -265,7 +265,8 @@ public class Dessin extends PApplet{
      */
     public void drawForme(Forme actForme) throws NegativeValue{
         strokeWeight(1);
-        stroke(actForme.getR(), actForme.getG(), actForme.getB());
+        int[] formeRgb = actForme.getRgb();
+        stroke(formeRgb[0], formeRgb[1], formeRgb[2]);
         noFill();
         if(actForme instanceof Cercle){//Si c'est un cercle
             circle(actForme.getCentre().getX(),actForme.getCentre().getY(), ((Cercle)actForme).getRayon());
