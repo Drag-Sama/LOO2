@@ -23,24 +23,24 @@ public class Dessin extends PApplet{
     Plan plan = new Plan();
     int act_save = 0; // indice de la sauvegarde actuelle.
     int nb_save = 0; //Nombre d'image sauvegardé et donc d'étape effectué 
-    Kmeans km = new Kmeans(plan,5);
+    Kmeans km = new Kmeans(plan,3);
             
 
     /**
      * Permet de changer les paramètres de base du dessin
      */
     public void settings(){
-        size(1300, 800);
+        size(1600, 1200);
     }
 
 
     public void setup(){
         background(255);
-        for(int i = 0; i < 7; i ++){
+        for(int i = 0; i < 10; i ++){
             Point point = new Point(0,0);
             point.setRandom(1300, 800);
             plan.addPoint(point);
-        }
+    }
         km.setPlan(plan);
         km.setupK_means();
         System.out.println("Setup terminé");
@@ -113,7 +113,8 @@ public class Dessin extends PApplet{
         plan.resetForme();
         for(int i = 0; i < km.getNbClusters(); i++){ //On ajoute les cercles pour chaque cluster
             Point pt =  km.maxDistCluster(i);
-            Cercle cercle = new Cercle(km.getCentres()[i].getDist(pt), km.getCentres()[i]);
+            System.out.println(km.getCentres()[i].getDist(pt));
+            Cercle cercle = new Cercle(km.getCentres()[i].getDist(pt) * 2, km.getCentres()[i]);
             cercle.setRGB(km.getCentres()[i].getR(), km.getCentres()[i].getG(), km.getCentres()[i].getB()); //On copie la couleur du centre du cluster dans le cercle
             plan.addForme(cercle);
         }
