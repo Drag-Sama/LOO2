@@ -208,7 +208,7 @@ public class Kmeans {
     public Point maxDistCluster(int idCluster) throws IndexOutOfBoundsException, NegativeValue {
         if (idCluster >= getNbClusters()) throw new IndexOutOfBoundsException("L'id du cluster est trop grand");
         else if (idCluster < 0) throw new NegativeValue();
-        Point[] arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
+        Point[] arrayPoints = centres[idCluster].getPoints();
         float maxDist = -1;
         Point maxPoint = null;
         for(int i = 0; i < centres[idCluster].getNbPoints(); i++){ // pour chaque point du cluster
