@@ -112,7 +112,6 @@ public class Kmeans {
         while (centresModif) { // tant que les centres ont été modifiés (à chaque itération) :
             for (int i = 0; i < this.getPlan().getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
                 centres[arrayPoints[i].getMinDistPoint(centres)].addPoint(arrayPoints[i]); // on attribue le point i au centre le plus proche.
-                System.out.println(centres[arrayPoints[i].getMinDistPoint(centres)]);
             }
             centresModif = false;
             for (int i = 0; i < nbClusters; i++) { // pour chaque cluster
@@ -139,7 +138,7 @@ public class Kmeans {
         }
         for (int i = 0; i < this.getPlan().getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
             centres[arrayPoints[i].getMinDistPoint(centres)].addPoint(arrayPoints[i]); // on attribue le point i au centre le plus proche.
-            System.out.println(centres[arrayPoints[i].getMinDistPoint(centres)]);
+//            System.out.println(centres[arrayPoints[i].getMinDistPoint(centres)]);
         }
     }
 
@@ -162,7 +161,6 @@ public class Kmeans {
         boolean centresModif = false;
         Point[] arrayPoints;
         arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
-        System.out.println("Nb Points : " + plan.getNbPoints());
         Collections.shuffle(Arrays.asList(arrayPoints)); // mélange la liste arrayPoints
         for (int i = 0; i < this.plan.getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
             centres[arrayPoints[i].getMinDistPoint(centres)].addPoint(arrayPoints[i]); // on attribue le point i au centre le plus proche.
@@ -191,7 +189,7 @@ public class Kmeans {
         }
         for (int i = 0; i < this.getPlan().getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
             centres[arrayPoints[i].getMinDistPoint(centres)].addPoint(arrayPoints[i]); // on attribue le point i au centre le plus proche.
-            System.out.println(centres[arrayPoints[i].getMinDistPoint(centres)]);
+//            System.out.println(centres[arrayPoints[i].getMinDistPoint(centres)]);
         }
         return centresModif;
     }
@@ -276,11 +274,12 @@ public class Kmeans {
         Point point6 = new Point(231,321);
         plan.addPoint(point6);
         Kmeans km = new Kmeans(plan,3);
-        for (int i = 0; i < km.getPlan().getNbPoints(); i++) System.out.println(km.getPlan().getPoints().toArray(new Point[km.getPlan().getNbPoints()])[i]);
+        Point[] arrayPoints = km.getPlan().getPoints().toArray(new Point[km.getPlan().getNbPoints()]);
+        for (int i = 0; i < km.getPlan().getNbPoints(); i++) System.out.println(arrayPoints[i]);
         km.k_means();
         for (int i = 0; i < km.getNbClusters(); i++) System.out.println(km.getCentres()[i]);
-        km.matricesCovariances2D();
-        for (int i = 0; i < km.getNbClusters(); i++) System.out.println(km.getCovariances()[i]);
+//        km.matricesCovariances2D();
+//        for (int i = 0; i < km.getNbClusters(); i++) System.out.println(km.getCovariances()[i]);
     }
 }
 
