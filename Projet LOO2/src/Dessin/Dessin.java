@@ -17,63 +17,113 @@ import java.util.Scanner;
  * Dessine les éléments du plan
  * @param plan Le plan du dessin
  * @param act_save Etape actuel du dessin
- * @param nb_save Nombre d'étape effectuée
+ * @param nb_save Nombre d'étapes effectuées
  */
 public class Dessin extends PApplet{
-    
+    int MAX_X;
+    int MAX_Y;
     Plan plan = new Plan();
     int act_save = 0; // indice de la sauvegarde actuelle.
     int nb_save = 0; //Nombre d'images sauvegardées et donc d'étapes effectuées
     Kmeans km;
-            
 
-    /**
-     * Permet de changer les paramètres de base du dessin (prédéfinie par Processing)
-     */
-    public void settings(){
-        size(1400, 1000);
-    }
 
     /**
      * Permet une mise en place avant le dessin (prédéfinie par Processing)
      */
     public void setup() throws IdenticalPoints{
         background(255);
+        int repUser;
         Scanner scan = new Scanner(System.in);
         boolean identical = true;
+
+        System.out.println("Maximum X du plan ? ");
+        repUser = scan.nextInt();
+        while (repUser < 0) {
+            System.out.println("-- Valeur négative ! --");
+            System.out.println("Maximum X du plan ? ");
+            repUser = scan.nextInt();
+        }
+        MAX_X = repUser;
+
+        System.out.println("Maximum Y du plan ? ");
+        repUser = scan.nextInt();
+        while (repUser < 0) {
+            System.out.println("-- Valeur négative ! --");
+            System.out.println("Maximum Y du plan ? ");
+            repUser = scan.nextInt();
+        }
+        MAX_Y = repUser;
+
         System.out.println("Mise en place des points aléatoire : 0 \nMise en place des points manuelle : 1 \nScénarios critiques : 2");
-        int repUser = scan.nextInt();
+        repUser = scan.nextInt();
+        while (repUser < 0 || repUser > 2) {
+            System.out.println("-- Entrée invalide ! --");
+            System.out.println("Mise en place des points aléatoire : 0 \nMise en place des points manuelle : 1 \nScénarios critiques : 2");
+            repUser = scan.nextInt();
+        }
+
         if (repUser == 0) { // si rep = 0, on remplit le plan par des points aléatoires.
             System.out.println("Combien de points ? ");
             repUser = scan.nextInt();
+            while (repUser < 0) {
+                System.out.println("-- Nombre de points invalide ! --");
+                System.out.println("Combien de points ? ");
+                repUser = scan.nextInt();
+            }
             for(int i = 0; i < repUser; i++){
-                System.out.println("Réponse : " + repUser);
-                System.out.println(i);
                 Point point = new Point(0,0);
-                point.setRandom(1400,1000);
+                point.setRandom(MAX_X,MAX_Y);
                 plan.addPoint(point);
             }
         }
+
         else if (repUser == 1) {
             System.out.println("Combien de points ? ");
             repUser = scan.nextInt();
+            while (repUser < 0) {
+                System.out.println("-- Nombre de points invalide ! --");
+                System.out.println("Combien de points ? ");
+                repUser = scan.nextInt();
+            }
             for(int i = 0; i < repUser; i ++){
                 System.out.println("Nouveau Point : \n \t X ? ");
                 int X = scan.nextInt();
+                while (X < 0 || X > MAX_X) {
+                    System.out.println("-- X invalide ! (négatif ou > " + MAX_X + " --");
+                    System.out.println("X ? ");
+                    X = scan.nextInt();
+                }
                 System.out.println("\t Y ? ");
                 int Y = scan.nextInt();
+                while (Y < 0 || Y > MAX_Y) {
+                    System.out.println("-- Y invalide ! (négatif ou > " + MAX_Y + " --");
+                    System.out.println("Y ? ");
+                    Y = scan.nextInt();
+                }
                 Point point = new Point(X,Y);
                 plan.addPoint(point);
             }
         }
+
         else {
             System.out.println("Scénario des points identiques : 0 \nScénario - : 1");
             repUser = scan.nextInt();
             if (repUser == 0) ScenarioIdenticalPoints();
             //else
         }
-        Point[] arrayPoints = plan.getPoints().toArray((new Point[plan.getNbPoints()]));
 
+        System.out.println("Nombre de clusters ? ");
+        repUser = scan.nextInt();
+        km.setNbClusters(repUser);
+        while (km.getNbClusters() < 0 ||km.getNbClusters() > plan.getNbPoints()) {
+            System.out.println("-- Nombre de clusters invalide (négatif ou > nb de points du plan (" + plan.getNbPoints() +")");
+            System.out.println("Nombre de clusters ? ");
+            repUser = scan.nextInt();
+            km.setNbClusters(repUser);
+        }
+
+        Point[] arrayPoints = plan.getPoints().toArray((new Point[plan.getNbPoints()]));
         for (int i = 1; i < plan.getNbPoints(); i++) {
             if (arrayPoints[i] != arrayPoints[i-1]) {
                 identical = false;
@@ -85,6 +135,14 @@ public class Dessin extends PApplet{
         km = new Kmeans(plan,3);
         km.setupK_means();
         System.out.println("Setup terminé");
+    }
+
+
+    /**
+     * Permet de changer les paramètres de base du dessin (prédéfinie par Processing)
+     */
+    public void settings(){
+        size(MAX_X, MAX_Y);
     }
 
     /**
@@ -125,6 +183,12 @@ public class Dessin extends PApplet{
     }
 
     public void ScenarioIdenticalPoints() {
+        for (int i = 0; i < 15; i++) {
+            plan.addPoint(new Point(100,100));
+        }
+    }
+
+    public void ScenarioTooMuchClusters() {
 
     }
 
