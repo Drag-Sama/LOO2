@@ -23,7 +23,7 @@ public class Dessin extends PApplet{
     Plan plan = new Plan();
     int act_save = 0; // indice de la sauvegarde actuelle.
     int nb_save = 0; //Nombre d'image sauvegardé et donc d'étape effectué 
-    Kmeans km = new Kmeans(plan,3);
+    Kmeans km = new Kmeans(plan,5);
             
 
     /**

@@ -150,7 +150,10 @@ public class Kmeans {
     public void setupK_means() {
         Point[] arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
         Collections.shuffle(Arrays.asList(arrayPoints));
-        for (int i = 0; i < this.getNbClusters(); i++) centres[i].copyPoint(arrayPoints[i]);
+        for (int i = 0; i < this.getNbClusters(); i++){ 
+            centres[i] = new Centre(0,0);
+            centres[i].setRandomRGB();
+            centres[i].copyPoint(arrayPoints[i]);}
     }
 
     /**
@@ -208,7 +211,7 @@ public class Kmeans {
         if (idCluster >= getNbClusters()) throw new IndexOutOfBoundsException("L'id du cluster est trop grand");
         else if (idCluster < 0) throw new NegativeValue();
         Point[] arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
-        float maxDist = 0;
+        float maxDist = -1;
         Point maxPoint = null;
         for(int i = 0; i < centres[idCluster].getNbPoints(); i++){ // pour chaque point du cluster
             float dist = centres[idCluster].getDist(arrayPoints[i]);
