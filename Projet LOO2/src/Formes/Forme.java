@@ -14,7 +14,7 @@ public abstract class Forme {
      */
     private Point centre;
     /**
-     * Couleur de la forme composée de 3 int :  r g b
+     * Couleur de la forme composée de 3 int : r g b
      */
     int[] rgb = new int[3];
 
@@ -57,9 +57,9 @@ public abstract class Forme {
     }
 
     /**
-     * Renvoie un chiffre aléatoire entre 0 et 255
+     * Renvoie un chiffre aléatoire entre 0 et 255 (pour la couleur)
      *
-     * @return
+     * @return un chiffre aléa entre 0 et 255
      */
     private int getRandomNumber() {
         return (int) ((Math.random() * (255)));

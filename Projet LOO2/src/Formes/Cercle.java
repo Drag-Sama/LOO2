@@ -3,7 +3,7 @@ import Point.Point;
 import exceptions.NegativeValue;
 
 /**
- * Une forme Cerlce
+ * Une forme Cercle
  * @param rayon le rayon du cercle
  * @param nvCentre le centre du cercle
  */

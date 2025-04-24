@@ -1,5 +1,6 @@
 package Dessin;
 import exceptions.IdenticalPoints;
+import exceptions.TooMuchClusters;
 import processing.core.PApplet;
 import processing.core.PImage;
 import Formes.Polygone;
@@ -14,7 +15,7 @@ import exceptions.NegativeValue;
 import java.util.Scanner;
 
 /**
- * Dessine les éléments du plan
+ * Permet de dessiner les éléments du plan
  * @param plan Le plan du dessin
  * @param act_save Etape actuel du dessin
  * @param nb_save Nombre d'étapes effectuées
@@ -36,7 +37,7 @@ public class Dessin extends PApplet{
         int repUser;
         Scanner scan = new Scanner(System.in);
         boolean identical = true;
-
+        boolean scenario = false;
         System.out.println("Mise en place des points aléatoire : 0 \nMise en place des points manuelle : 1 \nScénarios critiques : 2");
         repUser = scan.nextInt();
         while (repUser < 0 || repUser > 2) {
@@ -89,32 +90,43 @@ public class Dessin extends PApplet{
         }
 
         else {
-            System.out.println("Scénario des points identiques : 0 \nScénario - : 1");
+            scenario = true;
+            System.out.println("Scénario des points identiques : 0 \nScénario nombre de clusters trop grand : 1");
             repUser = scan.nextInt();
+            while (repUser < 0 || repUser > 1) {
+                System.out.println("-- Entrée invalide ! --");
+                System.out.println("Scénario des points identiques : 0 \nScénario nombre de clusters trop grand : 1");
+                repUser = scan.nextInt();
+            }
             if (repUser == 0) ScenarioIdenticalPoints();
-            //else
+            else ScenarioTooMuchClusters();
         }
-
-        System.out.println("Nombre de clusters ? ");
-        repUser = scan.nextInt();
-        km.setNbClusters(repUser);
-        while (km.getNbClusters() < 0 ||km.getNbClusters() > plan.getNbPoints()) {
-            System.out.println("-- Nombre de clusters invalide (négatif ou > nb de points du plan (" + plan.getNbPoints() +")");
+        if (!scenario) { // pour ne pas overwrite le nombre de clusters défini par le scénario
             System.out.println("Nombre de clusters ? ");
             repUser = scan.nextInt();
             km.setNbClusters(repUser);
-            if (km.getNbClusters() < Math.sqrt(plan.getNbPoints())) System.out.println("!! Attention : votre nombre de cluster est sûrement trop petit !!");
-            else if (km.getNbClusters() > Math.pow(plan.getNbPoints(),2)) System.out.println("!! Attention : votre nombre de cluster est sûrement trop grand !!");
+            while (km.getNbClusters() < 0 || km.getNbClusters() > plan.getNbPoints()) {
+                System.out.println("-- Nombre de clusters invalide (négatif ou > nb de points du plan (" + plan.getNbPoints() + ")");
+                System.out.println("Nombre de clusters ? ");
+                repUser = scan.nextInt();
+                km.setNbClusters(repUser);
+                if (km.getNbClusters() < Math.sqrt(plan.getNbPoints()))
+                    System.out.println("!! Attention : votre nombre de cluster est sûrement trop petit !!");
+                else if (km.getNbClusters() > Math.pow(plan.getNbPoints(), 2))
+                    System.out.println("!! Attention : votre nombre de cluster est sûrement trop grand !!");
+            }
         }
 
+        // est-ce que les points sont tous identiques ?
         Point[] arrayPoints = plan.getPoints().toArray((new Point[plan.getNbPoints()]));
         for (int i = 1; i < plan.getNbPoints(); i++) {
-            if (arrayPoints[i] != arrayPoints[i-1]) {
+            if (arrayPoints[i].getX() != arrayPoints[i-1].getX() || arrayPoints[i].getY() != arrayPoints[i-1].getY()) {
                 identical = false;
                 break;
             }
         }
         if (identical) throw new IdenticalPoints();
+        if (km.getNbClusters() >= plan.getNbPoints() - 2) throw new TooMuchClusters();
 
         km.setPlan(plan);
         km.setupK_means();
@@ -157,8 +169,13 @@ public class Dessin extends PApplet{
         try{
             System.out.println("Etape actuel : " + act_save + "\nNombre d'étape max : " + nb_save + " \n ------------ \nEtape précédente : 0\nEtape suivante : 1");
             int userAns = scan.nextInt();
+            while (userAns > 1 || userAns < 0) {
+                System.out.println("-- Entrée invalide ! --");
+                System.out.println("Etape actuel : " + act_save + "\nNombre d'étape max : " + nb_save + " \n ------------ \nEtape précédente : 0\nEtape suivante : 1");
+                userAns = scan.nextInt();
+            }
             if(userAns == 1){
-                background(255); //Pour dissocier chaque dessin → sinon les dessins se fusionnent.
+                background(255); //Pour dissocier chaque dessin → sinon les dessins se superposent.
                 if(act_save == nb_save){ //S'il n'y a pas d'image sauvegardée pour l'étape suivante
                     drawKmeans();
                     save("StockDessin\\dessin" + act_save + ".jpg");
@@ -185,14 +202,24 @@ public class Dessin extends PApplet{
         }
     }
 
+    /**
+     * Scénario 1, dans lequel tous les points sont identiques
+     */
     public void ScenarioIdenticalPoints() {
         for (int i = 0; i < 15; i++) {
             plan.addPoint(new Point(100,100));
+            km.setNbClusters(5);
         }
     }
 
+    /**
+     * Scénario 2, dans lequel le nombre de clusters est trop élevé par rapport au nombre de points
+     */
     public void ScenarioTooMuchClusters() {
-
+        for (int i = 0; i < 5; i++) {
+            plan.addPoint(new Point((float)Math.random() * MAX_X, (float)Math.random() * MAX_Y)); // on ajoute des points avec X et Y aléatoires
+        }
+        km.setNbClusters((int)Math.floor(Math.random() * 5) + 3); // nombre de clusters aléatoires entre N et N-2 (trop grand)
     }
 
     /**
