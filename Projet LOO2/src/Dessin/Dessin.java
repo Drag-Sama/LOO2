@@ -12,6 +12,7 @@ import Plan.Plan;
 import Point.Point;
 import exceptions.NegativeValue;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -168,11 +169,11 @@ public class Dessin extends PApplet{
         Scanner scan = new Scanner(System.in);
         background(255);
         try{
-            System.out.println("Etape actuel : " + act_save + "\nNombre d'étape max : " + nb_save + " \n ------------ \nEtape précédente : 0\nEtape suivante : 1");
+            System.out.println("Etape actuel : " + act_save + "\nNombre d'étape max : " + nb_save + " \n ------------ \nEtape précédente : 0\nEtape suivante : 1\nArrêt + suppressions des saves : 2");
             int userAns = scan.nextInt();
-            while (userAns > 1 || userAns < 0) {
+            while (userAns > 2 || userAns < 0) {
                 System.out.println("-- Entrée invalide ! --");
-                System.out.println("Etape actuel : " + act_save + "\nNombre d'étape max : " + nb_save + " \n ------------ \nEtape précédente : 0\nEtape suivante : 1");
+                System.out.println("Etape actuel : " + act_save + "\nNombre d'étape max : " + nb_save + " \n ------------ \nEtape précédente : 0\nEtape suivante : 1\nArrêt + suppressions des saves : 2");
                 userAns = scan.nextInt();
             }
             if(userAns == 1){
@@ -188,13 +189,20 @@ public class Dessin extends PApplet{
                     act_save += 1;
                 }
             }
-            else{
+            else if (userAns == 0){
                 if(act_save > 0){
                     act_save -= 1;
                     loadAndDrawImage();
                 }
                 else{
                     System.out.println("Erreur, il n'y a pas d'étape précédente");
+                }
+            }
+            else {
+                for (int i = 0; i < nb_save;i++) {
+                    File f = new File("StockDessin\\dessin" + i + ".jpg");
+                    f.delete();
+                    exit();
                 }
             }
         }
@@ -323,5 +331,6 @@ public class Dessin extends PApplet{
     public static void main(String[] args) {
         String[] appletArgs = new String[] { "Dessin.Dessin" };
         PApplet.main(appletArgs);
+
     }
 }

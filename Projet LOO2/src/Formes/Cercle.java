@@ -2,6 +2,8 @@ package Formes;
 import Point.Point;
 import exceptions.NegativeValue;
 
+import java.io.File;
+
 /**
  * Une forme Cercle
  * @param rayon le rayon du cercle
@@ -51,5 +53,14 @@ public class Cercle extends Forme {
         c.setCentre(p);
         c.setRandomRGB();
         System.out.println(c);
+        for (int i = 0; i < 4;i++) {
+            File f = new File("..\\StockDessin\\dessin" + i + ".jpg");
+            if (f.delete()) {
+             System.out.println("supprimééé");
+            }
+            else {
+                System.out.println("non");
+            }
+        }
     }
 }
