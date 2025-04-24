@@ -23,6 +23,7 @@ public class Matrice {
         for(int y = 0; y < dimY; y++){
             for(int x =0; x < dimX; x++){
                 valeur[y][x] = 0;
+                
             }
         }
     }
@@ -108,6 +109,42 @@ public class Matrice {
             }
           }  
         return resultat;
+    }
+
+    /**
+     * Transforme la matrice en matrice d'identité, ne renvoie rien
+     */
+    public void setToIdentite(){
+        for(int y = 0; y < dimY; y++){
+            for(int x =0; x < dimX; x++){
+                if(x != y)
+                    valeur[y][x] = 0;
+                else 
+                    valeur[y][x] = 1;
+            }
+        }
+    }
+
+    /**
+     * Renvoie l'inverse de la matrice
+     * @return une nouvelle matrice qui est l'inverse de la matrice actuel
+     */
+    public Matrice getInvert2x2(){
+        float a = getValeur(0,0);
+        float b = getValeur(0, 1);
+        float c = getValeur(1,0);
+        float d = getValeur(1,1);
+        float det =  a * d - b * c;
+        if (Math.abs(det) < 1e-10) {
+            throw new RuntimeException("Matrice non inversible (det = 0)");
+        }
+        Matrice inv = new Matrice(2,2);
+        inv.setValeur(0, 0, d/det);
+        inv.setValeur(0, 1, -b/det);
+        inv.setValeur(1, 0, -c/det);
+        inv.setValeur(1, 1, a/det);
+
+        return inv;
     }
 
     @Override
