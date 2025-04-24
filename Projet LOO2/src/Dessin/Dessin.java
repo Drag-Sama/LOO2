@@ -130,6 +130,7 @@ public class Dessin extends PApplet{
 
         km.setPlan(plan);
         km.setupK_means();
+        drawPoints(plan.getPoints().toArray(new Point[plan.getNbPoints()]),plan.getNbPoints());
         System.out.println("Setup terminé");
     }
 
@@ -254,14 +255,14 @@ public class Dessin extends PApplet{
         //Dessine le centre des clusters
         strokeWeight(6);
         stroke(0,0,0);
-        drawPoint(km.getCentres(),km.getNbClusters());
+        drawPoints(km.getCentres(),km.getNbClusters());
 
         //Dessine les points du plan
         Point[] arrayPoints;
         arrayPoints = plan.getPoints().toArray(new Point[plan.getNbPoints()]);
         stroke(255,0,0);
         strokeWeight(4);
-        drawPoint(arrayPoints, plan.getNbPoints());
+        drawPoints(arrayPoints, plan.getNbPoints());
     }
 
     /**
@@ -269,7 +270,7 @@ public class Dessin extends PApplet{
      * @param lPoints Liste de points à dessiner
      * @param nbPoints Nombre de points à dessiner
      */
-    public void drawPoint(Point[] lPoints, int nbPoints){
+    public void drawPoints(Point[] lPoints, int nbPoints){
         for(int i = 0; i < nbPoints; i ++){ //Boucle for qui parcours les points de la liste passée en paramètre
             point(lPoints[i].getX(),lPoints[i].getY());
         }
