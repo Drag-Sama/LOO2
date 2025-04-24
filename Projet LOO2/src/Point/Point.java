@@ -128,20 +128,7 @@ public class Point {
         return min;
     }
 
-    /**
-     * Retourne la valeur de l'indice du point du tableau "points" le plus proche
-     * @param points à comparer
-     * @return
-     */
-    public int getMinDistPointMahalanobis (Point[] points) {
-        int min = 0;
-        for (int i = 0; i < points.length; i++) { // pour tous les points de la liste
-            if (this.getDist(points[i]) <= this.getDist(points[min])) {
-                min = i;
-            }
-        }
-        return min;
-    }
+    
 
     public void setRandom(int maxX, int maxY){
         x = (int)(Math.random() * maxX);

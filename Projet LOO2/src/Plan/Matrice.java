@@ -57,9 +57,9 @@ public class Matrice {
      */
     public void setValeur(int x, int y, float nvVal){
         if(x >= 0 && x < dimX && y >= 0 && y < dimY)
-            valeur[x][y] = nvVal;
+            valeur[y][x] = nvVal;
         else{
-            System.out.println("Erreur de paramètre, x ou y ne sont pas compris entre 0 et "+ dimX + " ou " + dimY);
+            System.out.println("Erreur de paramètre [GetValeur], x(" + x + ") ou y(" + y + ") ne sont pas compris entre 0 et (x)"+ dimX + " ou (y)" + dimY);
         }
     }
 
@@ -71,9 +71,9 @@ public class Matrice {
      */
     public float getValeur(int x, int y){
         if(x >= 0 && x < dimX && y >= 0 && y < dimY)
-            return valeur[x][y];
+            return valeur[y][x];
         else{
-            System.out.println("Erreur de paramètre, x ou y ne sont pas compris entre 0 et "+ dimX + " ou " + dimY);
+            System.out.println("Erreur de paramètre [GetValeur], x(" + x + ") ou y(" + y + ") ne sont pas compris entre 0 et (x)"+ dimX + " ou (y)" + dimY);
             return -1;
         }
     }
@@ -98,13 +98,17 @@ public class Matrice {
      * @return matrice résultant de la multiplication
      */
     public Matrice multiplicationMatrice(Matrice mat2){
-        Matrice resultat = new Matrice(dimX, mat2.getDimY());
-        for(int i=0; i<2; i++){
-            for(int j=0; j<2; j++){ 
-              resultat.setValeur(i, j, 0);   
-              for(int k=0; k<2 ;k++)    
+        if(this.dimX != mat2.getDimY()){
+            System.err.println("Erreur: les matrices n'ont pas les bonnes dimensions : " + dimX + " , " + dimY + " et " + mat2.getDimX() + " , " + mat2.getDimY());
+            return null;
+        }
+        Matrice resultat = new Matrice(this.dimX, mat2.getDimY());
+        for(int i=0; i< this.dimY; i++){
+            for(int j=0; j< mat2.getDimX(); j++){ 
+              resultat.setValeur(j, i, 0);   
+              for(int k=0; k< this.dimX ;k++)    
               { 
-                resultat.setValeur(i, j, resultat.getValeur(i, j) + getValeur(i, k) * mat2.getValeur(k, j));    
+                resultat.setValeur(j, i, getValeur(k, i) * mat2.getValeur(j, k));    
               }
             }
           }  

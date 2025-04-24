@@ -255,7 +255,9 @@ public class Kmeans {
     }
 
     public void setupk_meansElongated(){
+        covariances = new Matrice[nbClusters];
         for(int i = 0; i < nbClusters; i ++){
+            covariances[i] = new Matrice(2, 2);
             covariances[i].setToIdentite();
         }
         setupK_means();
@@ -271,9 +273,9 @@ public class Kmeans {
         for(int i = 0; i < nbClusters; i ++){
             covariances[i] = new Matrice(2, 2);
             for (Point p : centres[i].getPoints()) { // pour chaque points de ce cluster
-                Matrice a = new Matrice(1,2);
+                Matrice a = new Matrice(2,1);
                 a.setValeur(0, 0, p.getX() - centres[i].getX());
-                a.setValeur(0,1,  p.getY() - centres[i].getY());
+                a.setValeur(1,0,  p.getY() - centres[i].getY());
                 a = a.multiplicationMatrice(a.getTransposee());
                 covariances[i] = covariances[i].additionMatrice(a);
             }
@@ -353,14 +355,17 @@ public class Kmeans {
      * @return la distance de Mahalanobis
      */
     float getDistMahalanobis(Point centre, Point point, int numCluster){
-        Matrice a = new Matrice(1, 2);
+        Matrice a = new Matrice(2, 1);
         Matrice aTranspo = new Matrice(2, 2);
         Matrice covarienceInv = new Matrice(2, 2);
         a.setValeur(0, 0, point.getX() - centre.getX());
-        a.setValeur(0, 1, point.getY() - centre.getY());
+        a.setValeur(1, 0, point.getY() - centre.getY());
         aTranspo = a.getTransposee();
+        System.out.println("covarience " + covariances[numCluster]);
         covarienceInv = covariances[numCluster].getInvert2x2();
+        System.out.println("a : " + a + "covarience inv : " + covarienceInv);
         a = a.multiplicationMatrice(covarienceInv);
+        System.out.println(a);
         a = a.multiplicationMatrice(aTranspo);
         return (float) Math.sqrt(a.getValeur(0,0));
     }
