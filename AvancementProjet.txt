@@ -1,0 +1,9 @@
+1. Création de Classes de Formes 2D : fini
+2. Dessin des Formes : fini
+3. Variantes de K-means
+	• K-means Classique : fini
+	• Elongated K-means : en cours
+	• K-means Basé sur les Formes : non
+4. Animation de l’Algorithme K-means : fini
+5. Problèmes de Bulles de Forme Variable : non
+6. Améliorations possibles : non
