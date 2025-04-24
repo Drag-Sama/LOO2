@@ -38,7 +38,6 @@ public class Centre extends Point {
      * @param nvSize La nouvelle taille de la liste
      */
     public void copyListePoints(Point[] lpt, int nvSize){
-        System.out.println(lpt.length);
         points = new Point[nvSize];
         for(int i = 0; i < lpt.length; i++){
             points[i] = lpt[i];
