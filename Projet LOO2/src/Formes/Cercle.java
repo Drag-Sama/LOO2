@@ -3,6 +3,7 @@ import Point.Point;
 import exceptions.NegativeValue;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Une forme Cercle
@@ -46,21 +47,12 @@ public class Cercle extends Forme {
         return  this.getClass().getSimpleName() +  " : \n \t Centre : " + this.getCentre().toString() + " \n \t Rayon : " + rayon;
     }
 
-    public static void main(String[] args) throws NegativeValue{
+    public static void main(String[] args) throws NegativeValue, IOException {
         Point p = new Point(0, 0);
         Cercle c = new Cercle(3, p);
         c.setRayon(2);
         c.setCentre(p);
         c.setRandomRGB();
         System.out.println(c);
-        for (int i = 0; i < 4;i++) {
-            File f = new File("..\\StockDessin\\dessin" + i + ".jpg");
-            if (f.delete()) {
-             System.out.println("supprimééé");
-            }
-            else {
-                System.out.println("non");
-            }
-        }
     }
 }

@@ -199,11 +199,11 @@ public class Dessin extends PApplet{
                 }
             }
             else {
-                for (int i = 0; i < nb_save;i++) {
-                    File f = new File("StockDessin\\dessin" + i + ".jpg");
-                    f.delete();
-                    exit();
-                }
+                for (int i = 0; i < nb_save+1;i++) {
+                    File f = new File("LOO2\\Projet LOO2\\StockDessin\\dessin" + i + ".jpg");
+                    System.out.println(f.getPath());
+                    }
+                exit();
             }
         }
         catch(NegativeValue e){
