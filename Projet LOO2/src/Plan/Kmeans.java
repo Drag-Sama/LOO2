@@ -277,14 +277,28 @@ public class Kmeans {
      * pas de return -> tout en effet de bord sur ses propres attributs.
      */
     public void elongatedKmeansOneStep() {
-
+        boolean centresModif = false;
+        Point[] arrayPoints;
+        arrayPoints = this.plan.getPoints().toArray(new Point[this.plan.getNbPoints()]);
+        Collections.shuffle(Arrays.asList(arrayPoints)); // mélange la liste arrayPoints
+        for (int i = 0; i < this.plan.getNbPoints(); i++) { // pour chaque points du plan on calcule la distance
+            centres[getMinDistPointMahalanobis(arrayPoints[i],centres)].addPoint(arrayPoints[i]); // on attribue le point i au
+                                                                      // centre le plus proche.
+        }
     }
 
    
-    public int getMinDistPointMahalanobis (Point[] points, Point centre) {
+    /**
+     * Renvoie le centre le plus proche du point en calculant la distance de Mahalanobis
+     * @param points le points
+     * @param centre la liste des centres
+     * @param numCluster le numéro du cluster du centre
+     * @return l'id du centre le plus proche du point
+     */
+    public int getMinDistPointMahalanobis (Point point, Centre[] centres) {
         int min = 0;
-        for (int i = 0; i < points.length; i++) { // pour tous les points de la liste
-            if (centre.getDist(points[i]) <= centre.getDist(points[min])) {
+        for (int i = 0; i < centres.length; i++) { // pour tous les points de la liste
+            if (getDistMahalanobis(point, centres[i], i) <=getDistMahalanobis(point, centres[min], min)) {
                 min = i;
             }
         }
@@ -308,7 +322,7 @@ public class Kmeans {
         covarienceInv = covariances[numCluster].getInvert2x2();
         a = a.multiplicationMatrice(covarienceInv);
         a = a.multiplicationMatrice(aTranspo);
-        return a.getValeur(0,0);
+        return (float) Math.sqrt(a.getValeur(0,0));
     }
 
     public static void main(String[] args) {
