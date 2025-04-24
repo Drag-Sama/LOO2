@@ -291,9 +291,24 @@ public class Kmeans {
         return min;
     }
 
-    float getDistMahalanobis(Point centre, Point point){
+    /**
+     * Calcul et renvoie la distance de Mahalanobis entre deux points
+     * @param centre le point du centre
+     * @param point le point dont on veut la distance avec le centre
+     * @param numCluster le numéro du cluster du point
+     * @return la distance de Mahalanobis
+     */
+    float getDistMahalanobis(Point centre, Point point, int numCluster){
         Matrice a = new Matrice(1, 2);
+        Matrice aTranspo = new Matrice(2, 2);
+        Matrice covarienceInv = new Matrice(2, 2);
         a.setValeur(0, 0, point.getX() - centre.getX());
+        a.setValeur(0, 1, point.getY() - centre.getY());
+        aTranspo = a.getTransposee();
+        covarienceInv = covariances[numCluster].getInvert2x2();
+        a = a.multiplicationMatrice(covarienceInv);
+        a = a.multiplicationMatrice(aTranspo);
+        return a.getValeur(0,0);
     }
 
     public static void main(String[] args) {
