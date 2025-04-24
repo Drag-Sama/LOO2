@@ -33,7 +33,7 @@ public class Dessin extends PApplet{
     /**
      * Permet une mise en place avant le dessin (prédéfinie par Processing)
      */
-    public void setup() throws IdenticalPoints{
+    public void setup() throws IdenticalPoints, TooMuchClusters{
         background(255);
         int repUser;
         Scanner scan = new Scanner(System.in);
@@ -99,8 +99,8 @@ public class Dessin extends PApplet{
                 System.out.println("Scénario des points identiques : 0 \nScénario nombre de clusters trop grand : 1");
                 repUser = scan.nextInt();
             }
-            if (repUser == 0) ScenarioIdenticalPoints();
-            else ScenarioTooMuchClusters();
+            if (repUser == 0) scenarioIdenticalPoints();
+            else scenarioTooMuchClusters();
         }
         if (!scenario) { // pour ne pas overwrite le nombre de clusters défini par le scénario
             System.out.println("Nombre de clusters ? ");
@@ -214,7 +214,7 @@ public class Dessin extends PApplet{
     /**
      * Scénario 1, dans lequel tous les points sont identiques
      */
-    public void ScenarioIdenticalPoints() {
+    public void scenarioIdenticalPoints() {
         for (int i = 0; i < 15; i++) {
             plan.addPoint(new Point(100,100));
             km.setNbClusters(5);
@@ -224,7 +224,7 @@ public class Dessin extends PApplet{
     /**
      * Scénario 2, dans lequel le nombre de clusters est trop élevé par rapport au nombre de points
      */
-    public void ScenarioTooMuchClusters() {
+    public void scenarioTooMuchClusters() {
         for (int i = 0; i < 5; i++) {
             plan.addPoint(new Point((float)Math.random() * MAX_X, (float)Math.random() * MAX_Y)); // on ajoute des points avec X et Y aléatoires
         }
@@ -285,9 +285,9 @@ public class Dessin extends PApplet{
     }
 
     /**
-     * Dessine les Forme de la liste passée en paramètre
+     * Dessine les Formes de la liste passée en paramètre
      * @param lForme Liste de Forme à dessiner
-     * @param nbForme Nombre de Forme à dessiner
+     * @param nbForme Nombre de Formes à dessiner
      * @throws NegativeValue
      */
     public void drawAllForme(Forme[] lForme, int nbForme)throws NegativeValue{
