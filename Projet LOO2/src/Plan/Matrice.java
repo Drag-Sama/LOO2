@@ -111,6 +111,24 @@ public class Matrice {
         return resultat;
     }
 
+    public Matrice additionMatrice(Matrice mat2){
+        if(dimX == mat2.getDimX() && dimY == mat2.dimY){
+            Matrice resultat = new Matrice(dimX, dimY);
+            for(int i=0; i<dimY; i++){
+                for(int j=0; j<dimX; j++){ 
+                  resultat.setValeur(j, i, this.getValeur(j, i) + mat2.getValeur(j, i));   
+                }
+              }  
+              return resultat;
+        }
+        else{
+            System.out.println("Erreur: Les deux matrices ne sont pas de la même dimension");
+            return null;
+        }
+        
+
+    }
+
     /**
      * Transforme la matrice en matrice d'identité, ne renvoie rien
      */
